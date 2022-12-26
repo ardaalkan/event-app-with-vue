@@ -1,55 +1,62 @@
 <template>
-  <form action="action">
+  <div action="action">
     <div class="container_register">
       <h1>Register</h1>
       <p>Please fill in this form to create an account.</p>
       <hr />
 
-      <label for="email"><b>Email</b></label>
-      <input
-        type="text"
-        placeholder="Enter Email"
-        name="email"
-        id="email"
-        required
-      />
+      <label for="email"><b>Name</b></label>
+      <input v-model="userData.fullname" type="text" placeholder="Enter Name" name="name" id="name" required />
 
-      <label for="psw"><b>Password</b></label>
-      <input
-        type="password"
-        placeholder="Enter Password"
-        name="psw"
-        id="psw"
-        required
-      />
+      <label for="psw"><b>Username</b></label>
+      <input v-model="userData.username" type="text" placeholder="Enter Password" name="psw" id="psw" required />
 
-      <label for="psw-repeat"><b>Repeat Password</b></label>
-      <input
-        type="password"
-        placeholder="Repeat Password"
-        name="psw-repeat"
-        id="psw-repeat"
-        required
-      />
+      <label for="psw-repeat"><b>Password</b></label>
+      <input v-model="userData.password" type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required />
       <hr />
 
-      <p>
-        By creating an account you agree to our <a href="#">Terms & Privacy</a>.
-      </p>
-      <button type="submit" class="registerbtn">Register</button>
+      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+      <button class="registerbtn" @click="onSave()">Register</button>
     </div>
 
     <div class="container_signin">
-      <p>Already have an account? <a href="#">Sign in</a>.</p>
+      <p>Already have an account? <router-link :to="{ name: 'Login' }">Giriş Yap</router-link></p>
     </div>
-  </form>
+  </div>
 </template>
 
-<script></script>
+<script>
+import CryptoJS from "crypto-js";
+
+export default {
+  data() {
+    return {
+      userData: {
+        username: null,
+        fullname: null,
+        password: null,
+      },
+    };
+  },
+  methods: {
+    onSave() {
+      const password = this.userData.password;
+      const key = "booklike123!456";
+      const cryptedPassword = CryptoJS.AES.encrypt(password, key).toString();
+
+      this.$appAxios.post("/users", { ...this.userData, password: cryptedPassword }).then((registered_user_response) => {
+        console.log("registered_user_response :>>", registered_user_response);
+        this.$router.push({ name: "Home" });
+      });
+
+      console.log(cryptedPassword);
+      // console.log(this.userData);
+    },
+  },
+};
+</script>
 
 <style>
-
-
 /* Add padding to containers */
 .container_register {
   padding: 16px;

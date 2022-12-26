@@ -11,7 +11,7 @@
       <input type="password" placeholder="Enter Password" name="psw" id="psw" required />
       <hr />
 
-      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
+      <router-link :to="{ name: 'Register' }">Register</router-link>
       <button type="submit" class="registerbtn">Login</button>
     </div>
 
