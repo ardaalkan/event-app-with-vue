@@ -1,6 +1,6 @@
 <template>
   <form action="action">
-    <div class="container">
+    <div class="container_register">
       <h1>Register</h1>
       <p>Please fill in this form to create an account.</p>
       <hr />
@@ -39,7 +39,7 @@
       <button type="submit" class="registerbtn">Register</button>
     </div>
 
-    <div class="container signin">
+    <div class="container_signin">
       <p>Already have an account? <a href="#">Sign in</a>.</p>
     </div>
   </form>
@@ -48,8 +48,10 @@
 <script></script>
 
 <style>
+
+
 /* Add padding to containers */
-.container {
+.container_register {
   padding: 16px;
   width: 40%;
   margin: auto;
@@ -102,8 +104,9 @@ a {
 }
 
 /* Set a grey background color and center the text of the "sign in" section */
-.signin {
+.container_signin {
   background-color: #f1f1f1;
+  padding: 10px;
   text-align: center;
 }
 </style>

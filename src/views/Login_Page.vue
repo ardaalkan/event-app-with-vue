@@ -1,31 +1,17 @@
 <template>
   <form action="action">
-    <div class="container">
+    <div class="container_login">
       <h1>Login</h1>
       <hr />
 
       <label for="email"><b>Email</b></label>
-      <input
-        type="text"
-        placeholder="Enter Email"
-        name="email"
-        id="email"
-        required
-      />
+      <input type="text" placeholder="Enter Email" name="email" id="email" required />
 
       <label for="psw"><b>Password</b></label>
-      <input
-        type="password"
-        placeholder="Enter Password"
-        name="psw"
-        id="psw"
-        required
-      />
+      <input type="password" placeholder="Enter Password" name="psw" id="psw" required />
       <hr />
 
-      <p>
-        By creating an account you agree to our <a href="#">Terms & Privacy</a>.
-      </p>
+      <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
       <button type="submit" class="registerbtn">Login</button>
     </div>
 
@@ -39,7 +25,7 @@
 
 <style>
 /* Add padding to containers */
-.container {
+.container_login {
   padding: 16px;
   width: 40%;
   margin: auto;
