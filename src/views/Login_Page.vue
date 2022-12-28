@@ -1,27 +1,61 @@
 <template>
-  <form action="action">
+  <div action="action">
+    {{ this.$store.getters._saltKey }}
     <div class="container_login">
       <h1>Login</h1>
       <hr />
 
-      <label for="email"><b>Email</b></label>
-      <input type="text" placeholder="Enter Email" name="email" id="email" required />
+      <label for="username"><b>Username</b></label>
+      <input v-model="userData.username" type="text" placeholder="Enter Username" name="username" id="username" required />
 
       <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw" id="psw" required />
+      <input v-model="userData.password" type="password" placeholder="Enter Password" name="psw" id="psw" required />
       <hr />
 
       <router-link :to="{ name: 'Register' }">Register</router-link>
-      <button type="submit" class="registerbtn">Login</button>
+      <button class="registerbtn" @click="onSubmit()">Register</button>
     </div>
 
     <!-- <div class="container signin">
       <p>Already have an account? <a href="#">Sign in</a>.</p>
     </div> -->
-  </form>
+  </div>
 </template>
 
-<script></script>
+<script>
+import CryptoJS from "crypto-js";
+export default {
+  data() {
+    return {
+      userData: {
+        username: null,
+        password: null,
+      },
+    };
+  },
+  methods: {
+    onSubmit() {
+      const password = CryptoJS.HmacSHA1(this.userData.password, this.$store.getters._saltKey).toString();
+      this.$appAxios
+        .get(`/users?username=${this.userData.username}&password=${password}`)
+        .then((login_response) => {
+          if (login_response?.data?.length > 0) {
+            this.$store.commit("setUser", login_response?.data[0]);
+            this.$router.push({ name: "Home" });
+            console.log(this.$router.push({ name: "Home_Page"}));
+          } else {
+            alert("Users doesnt exists.");
+          }
+          console.log(login_response);
+        })
+        .catch((e) => console.log(e));
+      // .finally(() => {
+      //   this.loader = false;
+      // });
+    },
+  },
+};
+</script>
 
 <style>
 /* Add padding to containers */

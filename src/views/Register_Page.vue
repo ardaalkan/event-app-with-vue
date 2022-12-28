@@ -42,7 +42,7 @@ export default {
     onSave() {
       const password = this.userData.password;
       const key = "booklike123!456";
-      const cryptedPassword = CryptoJS.AES.encrypt(password, key).toString();
+      const cryptedPassword = CryptoJS.HmacSHA1(password, key).toString();
 
       this.$appAxios.post("/users", { ...this.userData, password: cryptedPassword }).then((registered_user_response) => {
         console.log("registered_user_response :>>", registered_user_response);
@@ -112,7 +112,6 @@ a {
 
 /* Set a grey background color and center the text of the "sign in" section */
 .container_signin {
-  background-color: #f1f1f1;
   padding: 10px;
   text-align: center;
 }

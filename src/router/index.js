@@ -16,6 +16,11 @@ const routes = [
     path: "/register",
     component: () => import("@/views/Register_Page.vue"),
   },
+  {
+    name: "Products",
+    path: "/:products",
+    component: () => import("@/views/Products_Page.vue"),
+  },
 ];
 
 export default createRouter({

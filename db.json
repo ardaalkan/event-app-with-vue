@@ -112,38 +112,20 @@
     {
       "username": "arda",
       "fullname": "arda",
-      "password": "U2FsdGVkX1+kWkqI1I11UronoiDiQh6Tpesvt/Zcz8M=",
+      "password": "6ab4adb5c2dc445d331c3af0a28ccd31730c5f95",
       "id": 1
     },
     {
-      "username": "arda2",
-      "fullname": "arda2",
-      "password": "U2FsdGVkX1/vB52npCxKgGcWg78A4S/+DBvIvJ41MBM=",
+      "username": "a",
+      "fullname": "a",
+      "password": "3eed450ad9683aa66bc5b568dbacc48c6fa7ce1c",
       "id": 2
     },
     {
-      "username": "arda3",
-      "fullname": "arda3",
-      "password": "U2FsdGVkX1/1KRa8mUJgiETKzmFTKykH8m2lLj8ApvI=",
+      "username": "asd",
+      "fullname": "asd",
+      "password": "aa8d52ebc0496b9eae8c613e703c9d03c9cea9e9",
       "id": 3
-    },
-    {
-      "username": "arda4",
-      "fullname": "arda4",
-      "password": "U2FsdGVkX1/FYgH+Gmm89wLqT+4UdrIEwsxKsK5qtFE=",
-      "id": 4
-    },
-    {
-      "username": "arda5",
-      "fullname": "arda5",
-      "password": "U2FsdGVkX1/EHAcuPjIAKF6/ThGq9RbG8r3H9CgkJIk=",
-      "id": 5
-    },
-    {
-      "username": "ardaarda",
-      "fullname": "ardaarda",
-      "password": "U2FsdGVkX1/4U9jS5j/I0D78zSSurM0kBHiacDcTxzc=",
-      "id": 6
     }
   ]
 }

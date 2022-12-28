@@ -5,7 +5,7 @@
       <a class="active" href="#">Home</a>
       <a href="#shoes">Shoes</a>
       <a href="#backpacks">Backpacks</a>
-      <a href="#cart">Cart</a>
+      <a v-if="_isAuthenticated" href="#cart">Cart</a>
       <a href="#about">About</a>
     </div>
 
@@ -16,7 +16,15 @@
   </body>
 </template>
 
-<script></script>
+<script>
+import { mapGetters } from 'vuex';
+
+export default {
+  computed : {
+    ...mapGetters(["_isAuthenticated"])
+  }
+}
+</script>
 
 <style>
 body {
