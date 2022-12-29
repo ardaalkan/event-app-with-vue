@@ -22,6 +22,12 @@ import { mapGetters } from 'vuex';
 export default {
   computed : {
     ...mapGetters(["_isAuthenticated"])
+  },
+  methods : {
+    onLogout() {
+      this.$store.commit("logoutUser");
+      this.$router.push({ name: "Login_Page"});
+    }
   }
 }
 </script>
