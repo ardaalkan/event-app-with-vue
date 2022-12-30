@@ -22,6 +22,21 @@ const routes = [
     path: "/:products",
     component: () => import("@/views/Products_Page.vue"),
   },
+  {
+    name: "Detail",
+    path: "/:products/:id",
+    component: () => import("@/views/Products_Detail_Page.vue"),
+  },
+  {
+    name: "Cart",
+    path: "/cart",
+    component: () => import("@/views/Cart_Page.vue"),
+  },
+  {
+    name: "About",
+    path: "/about",
+    component: () => import("@/views/About_Page.vue"),
+  },
 ];
 
 const router = createRouter({
@@ -38,7 +53,7 @@ router.beforeEach((to, from, next) => {
 
   if (authRequiredRoutes.indexOf(to.name) > -1) {
     if (_isAuthenticated) next();
-    else next({ name: "Login_Page" });
+    else next({ name: "Login" });
   } else {
     next();
   }

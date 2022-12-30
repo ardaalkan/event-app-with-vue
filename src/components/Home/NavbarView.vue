@@ -2,11 +2,27 @@
   <body>
     <div class="topnav">
       <img src="../../assets/png_logo.png" />
-      <a class="active" href="#">Home</a>
-      <a href="#shoes">Shoes</a>
-      <a href="#backpacks">Backpacks</a>
-      <a v-if="_isAuthenticated" href="#cart">Cart</a>
-      <a href="#about">About</a>
+      <div class="router-link">
+        <router-link to="/">Home</router-link>
+      </div>
+      <div class="router-link">
+        <router-link to="/shoes">Shoes</router-link>
+      </div>
+      <div class="router-link">
+        <router-link to="/backpacks">Backpacks</router-link>
+      </div>
+      <div class="router-link" v-if="_isAuthenticated">
+        <router-link to="/cart">Cart</router-link>
+      </div>
+      <div class="router-link">
+        <router-link to="/about">About</router-link>
+      </div>
+      <div class="router-link" v-if="_isAuthenticated">
+        <a @click="onLogout">Logout</a>
+      </div>
+      <div class="router-link" v-else>
+        <router-link to="/">Login</router-link>
+      </div>
     </div>
 
     <!-- <div style="padding-left: 16px">
@@ -17,19 +33,19 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  computed : {
-    ...mapGetters(["_isAuthenticated"])
+  computed: {
+    ...mapGetters(["_isAuthenticated"]),
   },
-  methods : {
+  methods: {
     onLogout() {
       this.$store.commit("logoutUser");
-      this.$router.push({ name: "Login_Page"});
-    }
-  }
-}
+      this.$router.push({ name: "Login" });
+    },
+  },
+};
 </script>
 
 <style>
@@ -58,13 +74,28 @@ img {
   margin: 25px;
   align-items: center;
   float: left;
-  color: #c2c2c2;
+  color: #e4e4e4;
   text-align: center;
   text-decoration: none;
   font-size: 17px;
   display: flex;
   justify-content: center;
   letter-spacing: 1px;
+}
+
+.router-link {
+  border-radius: 5px;
+  margin: 5px;
+  align-items: center;
+  float: left;
+  color: #e4e4e4;
+  text-align: center;
+  text-decoration: none;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  letter-spacing: 1px;
+  cursor: pointer;
 }
 
 /* Change the color of links on hover */

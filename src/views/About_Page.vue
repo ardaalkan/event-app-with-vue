@@ -1,12 +1,13 @@
 <template>
   <NavbarView />
-  <h1 class="cart_text">Cart Page</h1>
+
+  <h1 class="about_text">About page</h1>
 </template>
 
-<script></script>
+<scrip></scrip>
 
 <style>
-.cart_text {
+.about_text {
   margin-left: 2rem;
   margin-top: 2rem;
   word-spacing: 2px;
