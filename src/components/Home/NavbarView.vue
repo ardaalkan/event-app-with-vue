@@ -85,7 +85,6 @@ img {
 
 .router-link {
   border-radius: 5px;
-  margin: 5px;
   align-items: center;
   float: left;
   color: #e4e4e4;
@@ -96,6 +95,11 @@ img {
   justify-content: center;
   letter-spacing: 1px;
   cursor: pointer;
+  background-color: #333;
+}
+
+.router-link:hover {
+  background-color: rgb(66, 66, 66);
 }
 
 /* Change the color of links on hover */
@@ -107,6 +111,7 @@ img {
 /* Add a color to the active/current link */
 .topnav a.active {
   /* background-color: #04aa6d; */
-  color: rgb(255, 255, 255);
+  color: rgb(252, 252, 252);
 }
+
 </style>

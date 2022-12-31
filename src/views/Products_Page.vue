@@ -1,17 +1,79 @@
 <template>
-  <NavbarView />
-  <h1 class="products_text">Products page</h1>
+  <body>
+    <NavbarView />
+    <section>
+      <h1 class="products_text">Products page</h1>
+      <h2 class="products_text">Card</h2>
+      <div class="main">
+        <div class="card_container">
+          <div class="card" v-for="category in categoryList" :key="category.id" value="category.id">
+            <img alt="Avatar" class="products_image" :src="category.image" />
+            <div class="container">
+              <h4>
+                <b>{{ category.name }}</b>
+              </h4>
+              <p>{{ category.price }}$</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
 </template>
 
-<script></script>
+<script>
+export default {
+  data() {
+    return {
+      categoryList: [],
+      userData: {},
+    };
+  },
+  // Add the "params" parameter dynamically for shoes and backpack.
+  mounted() {
+    this.$appAxios.get("/products?category=shoes").then((category_response) => {
+      this.categoryList = category_response?.data || [];
+      console.log(category_response.data);
+    });
+  },
+};
+</script>
 
 <style>
 .products_text {
-  margin-left: 2rem;
-  margin-top: 2rem;
-  word-spacing: 2px;
-  letter-spacing: 2px;
-  font-weight: 500;
-  font-size: x-large;
+  margin-left: 5%;
+}
+
+.card_container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.main {
+  margin-left: 5%;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 300px;
+  margin-right: 50px;
+  margin-top: 25px;
+  cursor: pointer;
+  background-color: rgb(250, 250, 250);
+}
+
+.products_image {
+  margin: 0;
+  display: block;
+  width: 100%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.container {
+  padding: 2px 16px;
 }
 </style>
