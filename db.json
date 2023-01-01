@@ -63,7 +63,7 @@
     {
       "id": 4,
       "category": "backpacks",
-      "image": "backpack1.jpg",
+      "image": "https://www.meeshop.com.tw/img/product/ICARE-J-049/200922160630768.jpg",
       "name": "Explorer",
       "price": 115.95,
       "skus": [
@@ -86,7 +86,7 @@
     {
       "id": 5,
       "category": "backpacks",
-      "image": "backpack2.jpg",
+      "image": "https://images.meesho.com/images/products/112268954/fcgp6_256.jpg",
       "name": "New",
       "price": 135.95,
       "skus": [

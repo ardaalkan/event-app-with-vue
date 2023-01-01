@@ -3,7 +3,7 @@
     <NavbarView />
     <section>
       <h1 class="products_text">Products page</h1>
-      <h2 class="products_text">Card</h2>
+      <h2 class="products_text">{{ this.$route.params.products }}</h2>
       <div class="main">
         <div class="card_container">
           <div class="card" v-for="category in categoryList" :key="category.id" value="category.id">
@@ -26,14 +26,15 @@ export default {
   data() {
     return {
       categoryList: [],
-      userData: {},
     };
   },
-  // Add the "params" parameter dynamically for shoes and backpack.
-  mounted() {
-    this.$appAxios.get("/products?category=shoes").then((category_response) => {
+
+  async mounted() {
+    let param = this.$route.params;
+    await this.$appAxios.get(`/products?category=${param.products}`).then((category_response) => {
       this.categoryList = category_response?.data || [];
       console.log(category_response.data);
+      console.log(this.$route.params.products);
     });
   },
 };
