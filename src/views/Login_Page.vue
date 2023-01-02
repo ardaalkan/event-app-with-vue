@@ -1,6 +1,6 @@
 <template>
   <div action="action">
-    {{ this.$store.getters._saltKey }}
+    <!-- {{ this.$store.getters._saltKey }} -->
     <div class="container_login">
       <h1>Login</h1>
       <hr />
@@ -13,7 +13,7 @@
       <hr />
 
       <router-link :to="{ name: 'Register' }">Register</router-link>
-      <button class="registerbtn" @click="onSubmit()">Register</button>
+      <button class="registerbtn" @click="onSubmit()">Login</button>
     </div>
 
     <!-- <div class="container signin">

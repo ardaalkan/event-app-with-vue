@@ -1,5 +1,8 @@
 # event-app-vue
 
+username: arda
+password: 123
+
 ## Project setup
 ```
 1 =>  npm install
