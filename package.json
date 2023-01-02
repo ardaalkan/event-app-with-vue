@@ -3,13 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "start-api": "json-server --watch db.json --delay 100",
+    "start-api": "json-server --watch db.json && npm start",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "dev": "concurrently \"npm run start-api\" \"npm run serve\""
   },
   "dependencies": {
     "axios": "^1.2.1",
+    "concurrently": "^7.6.0",
     "core-js": "^3.8.3",
     "crypto-js": "^4.1.1",
     "secure-ls": "^1.2.6",

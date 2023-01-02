@@ -6,8 +6,7 @@ password: 123
 ## Project setup
 ```
 1 =>  npm install
-2 =>  npm run start-api
-3 =>  npm run serve
+2 =>  npm run dev
 ```
 
 ### Compiles and hot-reloads for development
@@ -40,3 +39,4 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 | vuetify            | Vue Material Component Framework                       |
 | vuex               | State management for Vue.js                            |
 | vuex-persistedstate| Library to migrate vuex state using vuex-persistedstate|
+| concurrently       | Run multiple commands concurrently.                    |
