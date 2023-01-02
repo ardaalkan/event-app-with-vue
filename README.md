@@ -24,7 +24,7 @@ In the project directory, you can run:
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-`A responsive cards application that displays, adds to basket and filters products.`
+`In Development`
 
 | **Dependency**     | **Use**                                                |
 | ----------------   | ----------------------------------------------------   |
