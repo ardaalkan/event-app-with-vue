@@ -2,23 +2,38 @@
 
 ## Project setup
 ```
-npm install
+1 =>  npm install
+2 =>  npm run start-api
+3 =>  npm run serve
 ```
 
 ### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
+# Getting Started with Create React App
 
-### Compiles and minifies for production
-```
-npm run build
-```
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Available Scripts
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+In the project directory, you can run:
+
+### `npm start`
+
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+
+`A responsive cards application that displays, adds to basket and filters products.`
+
+| **Dependency**     | **Use**                                                |
+| ----------------   | ----------------------------------------------------   |
+| axios              | Promise based HTTP client for the browser and node.js  |
+| core-js            | Modular standard library for JavaScript                |
+| crypto-js          | JavaScript library of crypto standards.                |
+| secure-ls          | Secure localStorage data with high level of encrypt.   |
+| vue                | Progressive JS framework for building UI's             |
+| vue-router         | Routing for SPA apps with vue                          |
+| vuetify            | Vue Material Component Framework                       |
+| vuex               | State management for Vue.js                            |
+| vuex-persistedstate| Library to migrate vuex state using vuex-persistedstate|
