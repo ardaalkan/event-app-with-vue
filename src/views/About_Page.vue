@@ -1,7 +1,7 @@
 <template>
   <NavbarView />
 
-  <h1 class="about_text">About page</h1>
+  <h1 class="about_text">About && Contact page</h1>
 </template>
 
 <scrip></scrip>
