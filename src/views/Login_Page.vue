@@ -42,7 +42,7 @@ export default {
           if (login_response?.data?.length > 0) {
             this.$store.commit("setUser", login_response?.data[0]);
             this.$router.push({ name: "Home" });
-            console.log(this.$router.push({ name: "Home_Page"}));
+            console.log(this.$router.push({ name: "Home_Page" }));
           } else {
             alert("Users doesnt exists.");
           }

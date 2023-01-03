@@ -68,9 +68,14 @@ export default {
     };
   },
 
+  watch: {
+    $route: "performApiCall",
+  },
+
   created() {
     this.performApiCall();
   },
+
   //TODO: Add active render
   methods: {
     async performApiCall() {
