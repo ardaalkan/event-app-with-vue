@@ -2,23 +2,39 @@
   <NavbarView />
   <div class="masonary_view">
     <h1 class="home_text">Home Page <span>E-Commerce</span></h1>
-    <!-- <div class="container">
-      <figure class="landscape">
-        <img src="../assets/backpack1.jpg" alt="Backpack1" />
-      </figure>
-      <figure>
-        <img src="../assets/shoe1.jpg" alt="shoe1" />
-      </figure>
-      <figure>
-        <img src="../assets/backpack2.jpg" alt="backpack2" />
-      </figure>
-      <figure class="landscape">
-        <img src="../assets/shoe2.jpg" alt="shoe2" />
-      </figure>
-      <figure>
-        <img src="../assets/shoe3.jpg" alt="a hot air balloon shaped like a dog" />
-      </figure>
-    </div> -->
+    <span class="blob-background-component">
+      <svg width="1000" height="1000" viewBox="0 0 1000 1000">
+        <defs>
+          <filter id="grain" x="-50vw" y="-50vh" width="100vw" height="100vh">
+            <feFlood flood-color="#ffffff" result="neutral-gray" />
+
+            <feTurbulence in="neutral-gray" type="fractalNoise" baseFrequency="2.5" numOctaves="100" stitchTiles="stitch" result="noise" />
+
+            <feColorMatrix in="noise" type="saturate" values="0" result="destaturatedNoise"></feColorMatrix>
+
+            <feComponentTransfer in="desaturatedNoise" result="theNoise">
+              <feFuncA type="table" tableValues="0 0 0.1 0"></feFuncA>
+            </feComponentTransfer>
+
+            <feBlend in="SourceGraphic" in2="theNoise" mode="soft-light" result="noisy-image" />
+          </filter>
+
+          <clipPath id="shape">
+            <path
+              fill="currentColor"
+              d="M855,614.5Q773,729,677,845Q581,961,482,832Q383,703,259,668Q135,633,137,501Q139,369,240,297Q341,225,457.5,154Q574,83,651.5,195.5Q729,308,833,404Q937,500,855,614.5Z"
+            ></path>
+          </clipPath>
+        </defs>
+
+        <g filter="url(#grain)" clip-path="url(#shape)">
+          <path
+            fill="#e9fff6"
+            d="M855,614.5Q773,729,677,845Q581,961,482,832Q383,703,259,668Q135,633,137,501Q139,369,240,297Q341,225,457.5,154Q574,83,651.5,195.5Q729,308,833,404Q937,500,855,614.5Z"
+          />
+        </g>
+      </svg>
+    </span>
   </div>
   <FooterView />
 </template>
@@ -50,6 +66,12 @@
   flex-direction: column;
   /* align-items: center; */
   margin: auto;
+}
+
+.blop-background-component {
+  width: 50%;
+  display: absolute;
+  z-index: -1;
 }
 
 img {
