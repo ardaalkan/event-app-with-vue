@@ -13,7 +13,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: block;
+  position: fixed;
   left: 0;
   bottom: 0;
   height: 7rem;

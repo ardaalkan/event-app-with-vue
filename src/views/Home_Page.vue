@@ -3,7 +3,7 @@
   <div class="masonary_view">
     <h1 class="home_text">Home Page <span>E-Commerce</span></h1>
     <span class="blob-background-component">
-      <svg width="1000" height="1000" viewBox="0 0 1000 1000">
+      <!-- <svg width="1000" height="1000" viewBox="0 0 1000 1000">
         <defs>
           <filter id="grain" x="-50vw" y="-50vh" width="100vw" height="100vh">
             <feFlood flood-color="#ffffff" result="neutral-gray" />
@@ -33,7 +33,7 @@
             d="M855,614.5Q773,729,677,845Q581,961,482,832Q383,703,259,668Q135,633,137,501Q139,369,240,297Q341,225,457.5,154Q574,83,651.5,195.5Q729,308,833,404Q937,500,855,614.5Z"
           />
         </g>
-      </svg>
+      </svg> -->
     </span>
   </div>
   <FooterView />

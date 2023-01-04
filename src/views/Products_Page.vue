@@ -39,18 +39,20 @@
     <!-- TODO: Filtering Component -->
     <section>
       <!-- <h1 class="products_text">Products page</h1> -->
-      <h2 class="products_text">{{ this.$route.params.products.toUpperCase() }}</h2>
+      <div class="product-item-count">
+        <h2 class="products-text">{{ this.$route.params.products.toUpperCase() }} <span>* Item Length</span></h2>
+      </div>
       <div class="main">
         <div class="card_container">
           <!-- to={`/${category}/${p.id}`} -->
-          <router-link class="router-card" to="/products/id">
+          <router-link class="router-card" to="/shoes/1" name="Detail">
             <div class="card" v-for="category in categoryList" :key="category.id" value="category.id">
               <img alt="Avatar" class="products_image" :src="category.image" />
               <div class="container">
                 <h4>
-                  <b>{{ category.name }}</b>
+                  <b class="container-category-name">{{ category.name }}</b>
                 </h4>
-                <p>{{ category.price }}$</p>
+                <p class="container-category-price">{{ category.price }}$</p>
               </div>
             </div>
           </router-link>
@@ -91,8 +93,20 @@ export default {
 </script>
 
 <style>
-.products_text {
+.products-text {
+  padding-top: 15px;
   margin-left: 5%;
+}
+
+.products-text span {
+  font-size: large;
+  padding-left: 10px;
+  color: #383838;
+}
+
+.products-item-count {
+  display: flex;
+  margin-top: 150px;
 }
 
 .card_container {
@@ -119,6 +133,10 @@ export default {
   background-color: rgb(250, 250, 250);
 }
 
+.card img {
+  margin-bottom: 10px;
+}
+
 .products_image {
   margin: 0;
   display: block;
@@ -127,6 +145,7 @@ export default {
 
 .card:hover {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  filter: contrast(0.85);
 }
 
 .custom-select {
@@ -135,7 +154,12 @@ export default {
 }
 
 .container {
+  width: 300px;
+  height: 55px;
   padding: 2px 16px;
+  display: flex;
+  flex-direction: column;
+  color: rgb(49, 49, 49);
 }
 
 details {

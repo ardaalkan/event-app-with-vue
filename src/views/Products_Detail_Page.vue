@@ -47,6 +47,7 @@
     </div>
   </div>
 </template>
+<!-- :to="`/${param.products}/${param.id}`" -->
 
 <scrip></scrip>
 
@@ -141,7 +142,7 @@ img {
 }
 
 .container {
-  padding: 1px 5px;
+  padding: 1px 1px;
 }
 
 .product-detail-button {
@@ -150,8 +151,12 @@ img {
   background-color: rgb(19, 19, 19);
   margin-top: 10px;
   padding-top: 5px;
-  width: 8rem;
+  width: 135px;
   border-radius: 10px;
+}
+
+.product-detail-button:hover {
+  background-color: #3d3d3d;
 }
 
 /* .product-detail-button:hover {
