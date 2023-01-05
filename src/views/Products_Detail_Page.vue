@@ -1,80 +1,87 @@
 <template>
   <NavbarView />
-  <h1 class="product_detail_text">This is product detail page</h1>
-  <div class="product_title">
-    <img class="product-detail-image" src="../assets/shoe1.jpg" />
+  <h1 class="product_detail_text">Product Detail</h1>
+  <div class="product_title" v-for="detail in detailList" :key="detail.id" value="detail.id">
+    <img class="product-detail-image" :src="detail.image" />
     <div class="product_details_container">
-      <h1>Hiker</h1>
+      <h1>{{ detail.name }}</h1>
       <!-- <hr /> -->
       <div class="product_details_title">
-        <h2>This rugged boot will get you up the mountain safely.</h2>
-        <p>Price : $94.95</p>
+        <h2>{{ detail.description }}</h2>
+        <p>Price : {{ detail.price }}$</p>
+        <p class="free-shipping-container">Free shipping over 100 $</p>
       </div>
       <!-- <hr /> -->
-      <small>You must be logged in to see the size</small>
-      <details class="custom-select-detail-page">
-        <summary class="detail-page-radios">
-          <input type="radio" name="item" id="default" title="Filtering" checked />
-          <input type="radio" name="item" id="item1" title="Item 1" />
-          <input type="radio" name="item" id="item2" title="Item 2" />
-          <input type="radio" name="item" id="item3" title="Item 3" />
-          <input type="radio" name="item" id="item4" title="Item 4" />
-          <input type="radio" name="item" id="item5" title="Item 5" />
-        </summary>
-        <ul class="list">
-          <li>
-            <label for="item1">
-              Item 1
-              <span></span>
-            </label>
-          </li>
-          <li>
-            <label for="item2">Item 2</label>
-          </li>
-          <li>
-            <label for="item3">Item 3</label>
-          </li>
-          <li>
-            <label for="item4">Item 4</label>
-          </li>
-          <li>
-            <label for="item5">Item 5</label>
-          </li>
-        </ul>
-      </details>
-      <button class="product-detail-button">
-        <span>Add basket</span>
-      </button>
+      <!-- <small>You must be logged in to see the size</small> -->
+      <div class="detail-page-event-container">
+        <details class="custom-select-detail-page">
+          <summary class="detail-page-radios">
+            <input type="radio" name="item" id="default" title="Filtering" checked />
+            <input type="radio" name="item" id="item1" title="Item 1" />
+            <input type="radio" name="item" id="item2" title="Item 2" />
+            <input type="radio" name="item" id="item3" title="Item 3" />
+            <input type="radio" name="item" id="item4" title="Item 4" />
+            <input type="radio" name="item" id="item5" title="Item 5" />
+          </summary>
+          <ul class="list">
+            <li>
+              <label for="item1">
+                Item 1
+                <span></span>
+              </label>
+            </li>
+            <li>
+              <label for="item2">Item 2</label>
+            </li>
+            <li>
+              <label for="item3">Item 3</label>
+            </li>
+            <li>
+              <label for="item4">Item 4</label>
+            </li>
+            <li>
+              <label for="item5">Item 5</label>
+            </li>
+          </ul>
+        </details>
+        <div class="product-detail-event-buttons">
+          <button class="product-detail-button">
+            <span>Add basket</span>
+          </button>
+          <button class="product-detail-button">
+            <span>Favorite</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
+  <div>
+    <small> Todo : Similar Products && SliderJs</small>
+  </div>
 </template>
-<!-- :to="`/${param.products}/${param.id}`" -->
 
 <script>
+export default {
+  data() {
+    return {
+      detailList: [],
+    };
+  },
 
-// export default {
-//   data() {
-//     return {
-//       categoryList: [],
-//     };
-//   },
+  created() {
+    this.detailPageApiCall();
+  },
 
-//   created() {
-//     this.detailPageApiCall();
-//   },
-
-//   methods: {
-//     async detailPageApiCall() {
-//       let param = this.$route.params;
-//       this.$appAxios.get(`/products?category=${param.products}`).then((category_response) => {
-//         this.categoryList = category_response?.data || [];
-//         console.log(category_response.data);
-//         console.log(this.$route.params.products);
-//       });
-//     },
-//   },
-// };
-
+  methods: {
+    async detailPageApiCall() {
+      let param = this.$route.params.id;
+      this.$appAxios.get(`/products?id=${param}`).then((category_response) => {
+        this.detailList = category_response?.data || [];
+        // console.log(category_response.data);
+      });
+    },
+  },
+};
 </script>
 
 <style>
@@ -85,6 +92,8 @@
   display: flex;
   margin: auto;
   justify-content: center;
+  background-color: #ececec8e;
+  border: 1px solid rgb(238, 238, 238);
 }
 
 @media screen and (max-width: 950px) {
@@ -102,27 +111,58 @@
 .product-detail-image {
   margin-left: 0;
   margin-right: 0;
-  width: 60%;
-  min-width: 100px;
+  width: 50%;
+  max-width: 500px;
+  min-width: 400px;
   padding-right: 20px;
 }
 
 .product_detail_text {
-  margin-left: 2rem;
-  margin-top: 2rem;
+  display: flex;
+  padding-top: 55px;
+  padding-bottom: 25px;
+  margin-left: 5%;
   word-spacing: 2px;
   letter-spacing: 2px;
   font-weight: 500;
   font-size: x-large;
+  padding-top: 15px;
+  justify-content: center;
 }
 
 .product_details_container {
   width: 80%;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 950px) {
+  .product_details_container > h1 {
+    width: 95%;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+  }
 }
 
 .product_details_title {
   margin-top: 10px;
   margin-bottom: 20px;
+}
+
+@media screen and (max-width: 950px) {
+  .product_details_title {
+    width: 95%;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+  }
 }
 
 .products_text {
@@ -163,15 +203,47 @@
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
+.detail-page-event-container {
+}
+
+@media screen and (max-width: 950px) {
+  .detail-page-event-container {
+    width: 95%;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+}
+
 .custom-select-detail-page {
   margin-top: 10px;
 }
+
+/* @media screen and (max-width: 950px) {
+  .custom-select-detail-page {
+    width: 95%;
+    margin-left: 2rem;
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    align-items: center;
+  }
+} */
 
 .container {
   padding: 1px 1px;
 }
 
+.product-detail-event-buttons {
+}
+
 .product-detail-button {
+  margin-right: 10px;
   justify-content: center;
   height: 45px;
   background-color: rgb(19, 19, 19);

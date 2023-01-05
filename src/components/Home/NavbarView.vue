@@ -73,7 +73,7 @@ body {
 /* Style the links inside the navigation bar */
 .topnav a {
   border-radius: 5px;
-  margin: 25px;
+  margin: 15px;
   align-items: center;
   float: left;
   color: #e4e4e4;
