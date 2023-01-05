@@ -45,17 +45,17 @@
       <div class="main">
         <div class="card_container">
           <!-- to={`/${category}/${p.id}`} -->
-          <router-link class="router-card" to="/shoes/1" name="Detail">
-            <div class="card" v-for="category in categoryList" :key="category.id" value="category.id">
-              <img alt="Avatar" class="products_image" :src="category.image" />
+          <div class="card" v-for="category in categoryList" :key="category.id" value="category.id">
+            <router-link :to="`/${this.$route.params.products}/${category.id}`" class="router-card"  name="Detail">
+            <img alt="Avatar" class="products_image" :src="category.image" />
               <div class="container">
                 <h4>
                   <b class="container-category-name">{{ category.name }}</b>
                 </h4>
                 <p class="container-category-price">{{ category.price }}$</p>
               </div>
+            </router-link>
             </div>
-          </router-link>
         </div>
       </div>
     </section>
@@ -65,8 +65,10 @@
 <script>
 export default {
   data() {
+    
     return {
       categoryList: [],
+      category : null,
     };
   },
 
@@ -86,6 +88,7 @@ export default {
         this.categoryList = category_response?.data || [];
         console.log(category_response.data);
         console.log(this.$route.params.products);
+        // console.log(category_response)
       });
     },
   },

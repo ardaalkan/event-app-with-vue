@@ -1,7 +1,7 @@
 <template>
   <body>
     <div class="topnav">
-      <img src="../../assets/png_logo.png" />
+      <img class="navbar-image" src="../../assets/png_logo.png" />
       <div class="router-link">
         <router-link to="/">Home</router-link>
       </div>
@@ -54,9 +54,11 @@ body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-img {
+.navbar-image {
+  width: 95px;
+  height: 105px;
   margin-left: 10px;
-  margin-right: 20px;
+  margin-right: 10px;
 }
 
 .topnav {
@@ -113,5 +115,4 @@ img {
   /* background-color: #04aa6d; */
   color: rgb(252, 252, 252);
 }
-
 </style>
