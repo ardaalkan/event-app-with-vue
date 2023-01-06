@@ -1,7 +1,6 @@
 <template>
   <NavbarView />
   <h1 class="cart_text">Cart page</h1>
-  <hr />
   <div class="body-container">
     <!-- Basket -->
     <!-- <div class="basket-container">
@@ -34,9 +33,7 @@
         <h2>Horizon | Backpacks &euro; 100,-</h2>
         <p>Best backpacks from horizon..!</p>
         <div class="clear"></div>
-        <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">
-          ADD TO CART
-        </button>
+        <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">ADD</button>
       </div>
 
       <div class="product">
@@ -44,7 +41,7 @@
         <h2>Jacket &euro; 200,-</h2>
         <p>levi strauss & co.</p>
         <div class="clear"></div>
-        <button class="basket-add" data-basket-product-price="200" data-basket-product-id="prod2" data-basket-product-name="B">ADD TO CART</button>
+        <button class="basket-add" data-basket-product-price="200" data-basket-product-id="prod2" data-basket-product-name="B">ADD</button>
       </div>
     </div>
   </div>

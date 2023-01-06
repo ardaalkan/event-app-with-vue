@@ -57,8 +57,7 @@ body {
 .navbar-image {
   width: 95px;
   height: 95px;
-  margin-left: 10px;
-  margin-right: 10px;
+  padding: 10px;
 }
 
 .topnav {
@@ -67,22 +66,21 @@ body {
   height: 6.5rem;
   display: flex;
   flex-direction: row;
-  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.2);
   justify-content: center;
+  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.2);
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   border-radius: 5px;
-  margin: 20px;
+  padding: 40px;
   align-items: center;
   float: left;
   color: #e4e4e4;
   text-align: center;
   text-decoration: none;
-  font-size: 17px;
+  font-size: 15px;
   display: flex;
-  justify-content: center;
   letter-spacing: 1px;
 }
 
@@ -103,18 +101,68 @@ body {
 }
 
 .router-link:hover {
-  background-color: rgb(172, 172, 172);
+  background-color: rgb(65, 65, 65);
 }
 
-/* Change the color of links on hover */
-/* .topnav a:hover {
-  background-color: rgb(219, 219, 219);
-  color: black;
-} */
+@media screen and (max-width: 945px) {
+  .topnav {
+    background-color: #333;
+    overflow: hidden;
+    height: 6.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.2);
+  }
+  .topnav a {
+    border-radius: 2px;
+    padding: 5px;
+    align-items: center;
+    float: left;
+    color: #e4e4e4;
+    text-align: center;
+    text-decoration: none;
+    font-size: 15px;
+    display: flex;
+    letter-spacing: 1px;
+  }
+  .navbar-image {
+    width: 85px;
+    height: 85px;
+    padding: 1px;
+  }
+}
 
-/* Add a color to the active/current link */
-.topnav a.active {
-  /* background-color: #04aa6d; */
+@media screen and (max-width: 600px) {
+  .topnav {
+    background-color: #333;
+    overflow: hidden;
+    height: 6.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.2);
+  }
+  .topnav a {
+    border-radius: 2px;
+    padding: 5px;
+    align-items: center;
+    float: left;
+    color: #e4e4e4;
+    text-align: center;
+    text-decoration: none;
+    font-size: 13px;
+    display: flex;
+    letter-spacing: 1px;
+  }
+  .navbar-image {
+    width: 85px;
+    height: 85px;
+    padding: 10px;
+  }
+}
+
+/* .topnav a.active {
   color: rgb(252, 252, 252);
-}
+} */
 </style>

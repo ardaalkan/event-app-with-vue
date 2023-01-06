@@ -5,13 +5,13 @@
     <img class="product-detail-image" :src="detail.image" />
     <div class="product_details_container">
       <h1>{{ detail.name }}</h1>
-      <!-- <hr /> -->
+      <hr />
       <div class="product_details_title">
         <h2>{{ detail.description }}</h2>
         <p>Price : {{ detail.price }}$</p>
         <p class="free-shipping-container">Free shipping over 100 $</p>
       </div>
-      <!-- <hr /> -->
+      <hr />
       <!-- <small>You must be logged in to see the size</small> -->
       <div class="detail-page-event-container">
         <details class="custom-select-detail-page">
@@ -85,6 +85,11 @@ export default {
 </script>
 
 <style>
+hr {
+  border: 1px solid #e9e9e9;
+  margin-bottom: 25px;
+}
+
 .product_title {
   width: 85%;
   margin-left: 2rem;

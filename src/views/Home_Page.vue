@@ -3,12 +3,25 @@
   <h1 class="home_text">Home Page <span>E-Commerce</span></h1>
   <section class="hero-section">
     <div class="container-large relative">
-      <div class="hero-content ">
-        <h2>Save your money with us.</h2>
-        <p>This site is created for demonstrative purposes only and does not offer any real products or services..</p>
+      <div class="hero-content">
+        <h2>Save your money <br />with us.</h2>
+        <p>This site is created for demonstrative purposes only and does not offer any <br />real products or services..</p>
       </div>
       <div class="hero-image text-right">
         <img src="../assets/images-svg/header.svg" />
+      </div>
+    </div>
+  </section>
+  <section class="section-bg container-large">
+    <div class="container-large">
+      <div class="row">
+        <div class="column">
+          <img src="../assets/images-svg/section-1.svg" alt="We are the high level storage e-commerce" />
+        </div>
+        <div class="column flex-fill">
+          <h2>We are the high level <br />storage e-commerce</h2>
+          <p>This site is created for demonstrative purposes only and does not offer any real products or services.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -18,6 +31,7 @@
 <script></script>
 
 <style>
+/* Section One */
 .home_text {
   display: flex;
   flex-direction: columns;
@@ -26,7 +40,7 @@
   word-spacing: 2px;
   letter-spacing: 2px;
   font-weight: 500;
-  font-size: x-large;
+  font-size: 30px;
   font-family: "Montserrat", sans-serif;
 }
 
@@ -38,7 +52,6 @@
   color: rgb(0, 180, 60);
   font-weight: bold;
 }
-/* Vue: Slider and Grids */
 .home_img {
   height: 15rem;
   margin-left: 10px;
@@ -50,11 +63,25 @@
 }
 
 @media screen and (min-width: 1024px) {
+  .hero-section {
+    padding: 0.1rem 0;
+    margin-bottom: 50px;
+  }
+
+  .hero-section .hero-image {
+    padding-top: 80px;
+    width: 100%;
+    padding: 20px;
+  }
+
   .hero-section .hero-content {
-    max-width: 600px;
+    max-width: 645px;
+    font-size: 30px;
   }
   .hero-section .hero-content p {
     width: 380px;
+    margin-bottom: 50px;
+    font-size: 18px;
   }
   .hero-section .hero-content {
     position: absolute;
@@ -64,56 +91,64 @@
   }
 }
 
-.hero-section .hero-content h1 {
-  font-size: 80px;
-}
-
 .hero-section .hero-content p {
-  color: #4b5d68;
+  color: #000000;
   font-size: 18px;
   font-weight: 500;
   line-height: 2;
 }
 
-/* img {
-  max-width: 100%;
-  display: block;
-} */
-
-figure {
-  margin: 0;
-  display: grid;
-  grid-template-rows: 1fr auto;
+.hero-content {
+  padding: 20px;
 }
 
-figure > img {
-  grid-row: 1 / -1;
-  grid-column: 1;
+.row {
+  width: auto;
+  display: flex;
+  align-items: center;
+}
+/* Section One */
+
+/* Section Two */
+.section-bg {
+  margin-top: 1rem;
+  background-color: rgb(228, 255, 255);
+  border-radius: 10px;
+  margin-bottom: 80px;
 }
 
-figure a {
-  color: black;
-  text-decoration: none;
+.section-bg h2 {
+  color: #212353;
+  font-weight: 700;
+  line-height: 52px;
+  font-size: 40px;
+  padding-left: 10px;
+  margin-bottom: 40px;
 }
 
-figcaption {
-  grid-row: 2;
-  grid-column: 1;
-  background-color: rgba(255, 255, 255, 0.5);
-  padding: 0.2em 0.5em;
-  justify-self: start;
+.section-bg p {
+  color: #485d68;
+  font-size: 18px;
+  font-weight: 500;
+  padding-top: 10px;
+  padding-left: 10px;
+  line-height: 25px;
 }
 
-.container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: masonry;
-  gap: 1px;
-  max-width: 60%;
-  margin-top: 15px;
+@media screen and (max-width: 600px) {
+  .row {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-section .hero-image {
+    display: none;
+  }
+  .home_text {
+    font-size: 25px;
+  }
+  .hero-content {
+    padding-left: 20px;
+  }
 }
-
-.landscape {
-  grid-column-end: span 2;
-}
+/* Section Two */
 </style>

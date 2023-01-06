@@ -13,10 +13,9 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  position: fixed;
   left: 0;
   bottom: 0;
-  height: 7rem;
+  height: 15rem;
   width: 100%;
   background-color: rgb(225, 225, 225);
   color: rgb(140, 140, 140);
