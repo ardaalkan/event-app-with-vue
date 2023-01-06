@@ -51,12 +51,12 @@ export default {
 <style>
 body {
   margin: 0;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 .navbar-image {
   width: 95px;
-  height: 105px;
+  height: 95px;
   margin-left: 10px;
   margin-right: 10px;
 }
@@ -68,12 +68,13 @@ body {
   display: flex;
   flex-direction: row;
   box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.2);
+  justify-content: center;
 }
 
 /* Style the links inside the navigation bar */
 .topnav a {
   border-radius: 5px;
-  margin: 15px;
+  margin: 20px;
   align-items: center;
   float: left;
   color: #e4e4e4;
@@ -87,6 +88,7 @@ body {
 
 .router-link {
   border-radius: 5px;
+  padding: 5px;
   align-items: center;
   float: left;
   color: #e4e4e4;
@@ -101,7 +103,7 @@ body {
 }
 
 .router-link:hover {
-  background-color: rgb(66, 66, 66);
+  background-color: rgb(172, 172, 172);
 }
 
 /* Change the color of links on hover */

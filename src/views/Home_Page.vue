@@ -1,8 +1,17 @@
 <template>
   <NavbarView />
-  <div>
-    <h1 class="home_text">Home Page <span>E-Commerce</span></h1>
-  </div>
+  <h1 class="home_text">Home Page <span>E-Commerce</span></h1>
+  <section class="hero-section">
+    <div class="container-large relative">
+      <div class="hero-content ">
+        <h2>Save your money with us.</h2>
+        <p>This site is created for demonstrative purposes only and does not offer any real products or services..</p>
+      </div>
+      <div class="hero-image text-right">
+        <img src="../assets/images-svg/header.svg" />
+      </div>
+    </div>
+  </section>
   <FooterView />
 </template>
 
@@ -10,12 +19,19 @@
 
 <style>
 .home_text {
-  margin-left: 2rem;
-  margin-top: 2rem;
+  display: flex;
+  flex-direction: columns;
+  justify-content: center;
+  padding: 40px;
   word-spacing: 2px;
   letter-spacing: 2px;
   font-weight: 500;
   font-size: x-large;
+  font-family: "Montserrat", sans-serif;
+}
+
+.home_text span {
+  padding-left: 10px;
 }
 
 .home_text span {
@@ -28,16 +44,41 @@
   margin-left: 10px;
 }
 
-.blop-background-component {
-  width: 50%;
-  display: absolute;
-  z-index: -1;
+.container-large {
+  max-width: 1024px;
+  margin: 0 auto;
 }
 
-img {
+@media screen and (min-width: 1024px) {
+  .hero-section .hero-content {
+    max-width: 600px;
+  }
+  .hero-section .hero-content p {
+    width: 380px;
+  }
+  .hero-section .hero-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+}
+
+.hero-section .hero-content h1 {
+  font-size: 80px;
+}
+
+.hero-section .hero-content p {
+  color: #4b5d68;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 2;
+}
+
+/* img {
   max-width: 100%;
   display: block;
-}
+} */
 
 figure {
   margin: 0;
