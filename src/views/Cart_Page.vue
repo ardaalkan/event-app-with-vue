@@ -33,15 +33,8 @@
         <h2>Horizon | Backpacks &euro; 100,-</h2>
         <p>Best backpacks from horizon..!</p>
         <div class="clear"></div>
-        <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">ADD</button>
-      </div>
-
-      <div class="product">
-        <img src="http://via.placeholder.com/100/ffffff" />
-        <h2>Jacket &euro; 200,-</h2>
-        <p>levi strauss & co.</p>
-        <div class="clear"></div>
-        <button class="basket-add" data-basket-product-price="200" data-basket-product-id="prod2" data-basket-product-name="B">ADD</button>
+        <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">+</button>
+        <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">-</button>
       </div>
     </div>
   </div>
@@ -77,12 +70,13 @@
   margin: 15px 0px 0px 0px;
   background-color: rgb(29, 29, 29);
   color: white;
-  border: 0px;
   border-radius: 10px;
-  padding: 5px 10px;
+  padding: 0px 15px;
+  font-size: 30px;
+  margin-left: 5px;
 }
 .body-container .products .product button:hover {
-  background-color: #34568b;
+  background-color: #2a3f63;
 
   cursor: pointer;
 }

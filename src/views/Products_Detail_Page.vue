@@ -17,7 +17,7 @@
       <div class="detail-page-event-container">
         <details class="custom-select-detail-page">
           <summary class="detail-page-radios">
-            <input type="radio" name="item" id="default" title="Filtering" checked />
+            <input type="radio" name="item" id="default" title="What Size?" checked />
             <input type="radio" name="item" id="item1" title="Item 1" />
             <input type="radio" name="item" id="item2" title="Item 2" />
             <input type="radio" name="item" id="item3" title="Item 3" />
@@ -173,6 +173,10 @@ hr {
   margin-bottom: 20px;
 }
 
+.free-shipping-container{
+  font-size: 12px;
+}
+
 @media screen and (max-width: 950px) {
   .product_details_title {
     width: 95%;
@@ -266,7 +270,7 @@ hr {
   margin-right: 10px;
   justify-content: center;
   height: 45px;
-  background-color: rgb(19, 19, 19);
+  background-color: #364147;
   margin-top: 10px;
   padding-top: 5px;
   width: 135px;
@@ -274,7 +278,7 @@ hr {
 }
 
 .product-detail-button:hover {
-  background-color: #3d3d3d;
+  background-color: #303030ad;
 }
 
 /* .product-detail-button:hover {
