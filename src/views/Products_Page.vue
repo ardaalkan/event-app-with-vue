@@ -38,13 +38,13 @@
     <!-- TODO: Filtering Component -->
     <!-- TODO: Filtering Component -->
     <section>
-      <!-- <h1 class="products_text">Products page</h1> -->
       <div class="product-item-count">
-        <h2 class="products-text">{{ this.$route.params.products.toUpperCase() }} <span>* Item Length</span></h2>
+        <h2 class="products-text">
+          {{ this.$route.params.products.toUpperCase() }}<span>/&nbsp;{{ this.categoryList?.length }} Item Exists</span>
+        </h2>
       </div>
       <div class="main">
         <div class="card_container">
-          <!-- to={`/${category}/${p.id}`} -->
           <div class="card" v-for="category in categoryList" :key="category.id" value="category.id">
             <router-link :to="`/${this.$route.params.products}/${category.id}`" class="router-card" name="Detail">
               <img alt="Avatar" class="products_image" :src="category.image" />
@@ -79,15 +79,14 @@ export default {
     this.performApiCall();
   },
 
-  //TODO: Add active render
   methods: {
     async performApiCall() {
       let param = this.$route.params;
       this.$appAxios.get(`/products?category=${param.products}`).then((category_response) => {
         this.categoryList = category_response?.data || [];
+        console.log(this.categoryList?.length);
         // console.log(category_response.data);
         // console.log(this.$route.params.products);
-        // console.log(category_response)
       });
     },
   },
@@ -101,9 +100,10 @@ export default {
 }
 
 .products-text span {
-  font-size: large;
-  padding-left: 10px;
-  color: #383838;
+  font-size: 15;
+  padding-left: 12px;
+  color: #5f5f5f;
+  font-weight: 400;
 }
 
 .products-item-count {

@@ -1,6 +1,7 @@
 <template>
   <NavbarView />
   <h1 class="product_detail_text">Product Detail</h1>
+  <p class="product-router-info">PRODUCT / {{ this.$route.params.products.toUpperCase() }}</p>
   <div class="product_title" v-for="detail in detailList" :key="detail.id" value="detail.id">
     <img class="product-detail-image" :src="detail.image" />
     <div class="product_details_container">
@@ -56,7 +57,7 @@
     </div>
   </div>
   <div>
-    <small> Todo : Similar Products && SliderJs</small>
+    <!-- <small> Todo : Similar Products && SliderJs</small> -->
   </div>
 </template>
 
@@ -75,9 +76,10 @@ export default {
   methods: {
     async detailPageApiCall() {
       let param = this.$route.params.id;
+      let category = this.$route.params.products;
       this.$appAxios.get(`/products?id=${param}`).then((category_response) => {
         this.detailList = category_response?.data || [];
-        // console.log(category_response.data);
+        console.log(category);
       });
     },
   },
@@ -101,6 +103,13 @@ hr {
   border: 1px solid rgb(238, 238, 238);
 }
 
+.product-router-info {
+  padding-left: 50px;
+  padding-bottom: 10px;
+  margin-left: 5%;
+  font-size: 12px;
+}
+
 @media screen and (max-width: 950px) {
   .product_title {
     width: 95%;
@@ -110,6 +119,12 @@ hr {
     flex-direction: column;
     margin: auto;
     align-items: center;
+  }
+  .product-router-info {
+    padding-left: 10px;
+    padding-bottom: 5px;
+    margin-left: 1%;
+    font-size: 10px;
   }
 }
 
