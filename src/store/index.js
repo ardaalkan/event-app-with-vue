@@ -8,13 +8,18 @@ export default createStore({
     user: null,
     saltKey: "booklike123!456",
   },
+
   mutations: {
     setUser(state, user) {
       state.user = user;
     },
-    logoutUser(state){
+    logoutUser(state) {
       state.user = null;
-    }
+    },
+    addToFavorite(state, favoriteId) {
+      state.user.favorites.push(favoriteId);
+      console.log(favoriteId);
+    },
   },
   getters: {
     _isAuthenticated: (state) => state.user !== null,
@@ -26,6 +31,8 @@ export default createStore({
       delete user?.password;
       return user;
     },
+    _userFavorites: (state) => state?.user?.favorites || [],
+    _currentUserId: (state) => state?.user?.id,
     _saltKey: (state) => state.saltKey,
   },
   plugins: [

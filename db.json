@@ -16,8 +16,7 @@
           "size": 8
         }
       ],
-      "description": "This is Beast!",
-      "favorite": false
+      "description": "This is Beast!"
     },
     {
       "id": 2,
@@ -35,8 +34,7 @@
           "size": 9
         }
       ],
-      "description": "Sure-footed traction in slippery conditions.",
-      "favorite": true
+      "description": "Sure-footed traction in slippery conditions."
     },
     {
       "id": 3,
@@ -80,8 +78,7 @@
           "size": 9
         }
       ],
-      "description": "Should always come with you..",
-      "favorite": true
+      "description": "Should always come with you.."
     },
     {
       "id": 5,
@@ -113,25 +110,91 @@
       "username": "arda",
       "fullname": "arda",
       "password": "6ab4adb5c2dc445d331c3af0a28ccd31730c5f95",
-      "id": 1
-    },
-    {
-      "username": "a",
-      "fullname": "a",
-      "password": "3eed450ad9683aa66bc5b568dbacc48c6fa7ce1c",
-      "id": 2
-    },
-    {
-      "username": "asd",
-      "fullname": "asd",
-      "password": "aa8d52ebc0496b9eae8c613e703c9d03c9cea9e9",
-      "id": 3
-    },
-    {
-      "username": "arda1",
-      "fullname": "arda1",
-      "password": "17cd1f76bdf7d29a24f4a4bc9aaa6f2217743a8a",
-      "id": 4
+      "id": 1,
+      "likes": [],
+      "carts": [],
+      "favorites": [
+        [
+          {
+            "id": 2,
+            "category": "shoes",
+            "image": "https://images.meesho.com/images/products/75116716/o63wu_256.jpg",
+            "name": "Climber",
+            "price": 78.99,
+            "skus": [
+              {
+                "sku": "28",
+                "size": 8
+              },
+              {
+                "sku": "29",
+                "size": 9
+              }
+            ],
+            "description": "Sure-footed traction in slippery conditions."
+          }
+        ],
+        [
+          {
+            "id": 2,
+            "category": "shoes",
+            "image": "https://images.meesho.com/images/products/75116716/o63wu_256.jpg",
+            "name": "Climber",
+            "price": 78.99,
+            "skus": [
+              {
+                "sku": "28",
+                "size": 8
+              },
+              {
+                "sku": "29",
+                "size": 9
+              }
+            ],
+            "description": "Sure-footed traction in slippery conditions."
+          }
+        ],
+        [
+          {
+            "id": 2,
+            "category": "shoes",
+            "image": "https://images.meesho.com/images/products/75116716/o63wu_256.jpg",
+            "name": "Climber",
+            "price": 78.99,
+            "skus": [
+              {
+                "sku": "28",
+                "size": 8
+              },
+              {
+                "sku": "29",
+                "size": 9
+              }
+            ],
+            "description": "Sure-footed traction in slippery conditions."
+          }
+        ],
+        [
+          {
+            "id": 2,
+            "category": "shoes",
+            "image": "https://images.meesho.com/images/products/75116716/o63wu_256.jpg",
+            "name": "Climber",
+            "price": 78.99,
+            "skus": [
+              {
+                "sku": "28",
+                "size": 8
+              },
+              {
+                "sku": "29",
+                "size": 9
+              }
+            ],
+            "description": "Sure-footed traction in slippery conditions."
+          }
+        ]
+      ]
     }
   ]
 }

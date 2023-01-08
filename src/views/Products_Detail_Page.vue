@@ -47,9 +47,9 @@
         </details>
         <div class="product-detail-event-buttons">
           <button class="product-detail-button">
-            <span>Add basket</span>
+            <span @click="saveCart">Add basket</span>
           </button>
-          <button class="product-detail-button">
+          <button class="product-detail-button" @click="saveFavorites" :class="alreadyInFav">
             <span>Favorite</span>
           </button>
         </div>
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   data() {
     return {
@@ -74,13 +76,30 @@ export default {
   },
 
   methods: {
-    async detailPageApiCall() {
+    detailPageApiCall() {
       let param = this.$route.params.id;
       let category = this.$route.params.products;
       this.$appAxios.get(`/products?id=${param}`).then((category_response) => {
         this.detailList = category_response?.data || [];
         console.log(category);
       });
+    },
+    saveFavorites() {
+      const favorites = [...this._userFavorites, this.detailList];
+      this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, { favorites }).then((cart_response) => {
+        console.log(this._getCurrentUser.id);
+        console.log(cart_response);
+        this.$store.commit("addToFavorite", this.detailList);
+      });
+    },
+  },
+  computed: {
+    ...mapGetters(["_getCurrentUser", "_userFavorites"]),
+
+    alreadyInFav() {
+      return {
+        "favorite-item-active": this._userFavorites?.indexOf(this.detailList.id) > -1,
+      };
     },
   },
 };
@@ -173,7 +192,7 @@ hr {
   margin-bottom: 20px;
 }
 
-.free-shipping-container{
+.free-shipping-container {
   font-size: 12px;
 }
 
@@ -277,9 +296,13 @@ hr {
   border-radius: 10px;
 }
 
-.product-detail-button:hover {
-  background-color: #303030ad;
+.favorite-item-active {
+  background-color: rgb(0, 238, 0);
 }
+
+/* .product-detail-button:hover {
+  background-color: #303030ad;
+} */
 
 /* .product-detail-button:hover {
   height: 45px;
