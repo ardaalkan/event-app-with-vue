@@ -49,7 +49,13 @@
           <button class="product-detail-button">
             <span @click="saveCart">Add basket</span>
           </button>
-          <button class="product-detail-button" @click="saveFavorites" :class="alreadyInFav">
+          <button
+            class="product-detail-button"
+            @click="saveFavorites"
+            :class="{
+              'favorite-item-active': alreadyInFav,
+            }"
+          >
             <span>Favorite</span>
           </button>
         </div>
@@ -82,14 +88,27 @@ export default {
       this.$appAxios.get(`/products?id=${param}`).then((category_response) => {
         this.detailList = category_response?.data || [];
         console.log(category);
+        // let arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].id)));
+        // console.log(arr, "hey");
+        // console.log(arr[0].id);
       });
     },
     saveFavorites() {
-      const favorites = [...this._userFavorites, this.detailList];
+      const arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].id)));
+      let favorites = [...this._userFavorites];
+
+      if (!this.alreadyInFav) {
+        favorites = [...favorites, arr];
+      } else {
+        favorites = favorites.filter((l) => l !== arr);
+      }
+
       this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, { favorites }).then((cart_response) => {
-        console.log(this._getCurrentUser.id);
+        // console.log(this._getCurrentUser.id);
         console.log(cart_response);
-        this.$store.commit("addToFavorite", this.detailList);
+        // console.log(this.detailList, `hey`);
+        console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "this.arr");
+        this.$store.commit("setFavorite", favorites);
       });
     },
   },
@@ -97,9 +116,8 @@ export default {
     ...mapGetters(["_getCurrentUser", "_userFavorites"]),
 
     alreadyInFav() {
-      return {
-        "favorite-item-active": this._userFavorites?.indexOf(this.detailList.id) > -1,
-      };
+      console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "already in fav id");
+      return this._userFavorites?.indexOf(JSON.parse(JSON.stringify(this.detailList[0].id))) > -1;
     },
   },
 };

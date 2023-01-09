@@ -16,9 +16,9 @@ export default createStore({
     logoutUser(state) {
       state.user = null;
     },
-    addToFavorite(state, favoriteId) {
-      state.user.favorites.push(favoriteId);
-      console.log(favoriteId);
+    setFavorite(state, favoriteId) {
+      state.user.favorites = favoriteId;
+      // console.log(favoriteId);
     },
   },
   getters: {
