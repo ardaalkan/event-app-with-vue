@@ -2,16 +2,20 @@
   <body>
     <NavbarView />
     <section class="favorite-section">
-      <div v-if="favoriteList.length">
-        <div class="card" v-for="favorite in favoriteList" :key="favorite.id" value="favorite.id">
-          <img class="favorite-image" :src="favorite.image" alt="Denim Jeans" />
-          <h1>{{ favorite.category }}</h1>
-          <p class="price">{{ favorite.price }}$</p>
-          <p>{{ favorite.description }}</p>
-          <p><button>Remove</button></p>
+      <div class="favorite-container-item">
+        <div class="favorite-item-iterate" v-if="favoriteList.length">
+          <div class="card" v-for="favorite in favoriteList" :key="favorite.id" value="favorite.id">
+            <img class="favorite-image" :src="favorite.image" alt="favorite-product" />
+            <div class="favorite-container-descriptions">
+              <h1>{{ favorite.category }}</h1>
+              <p class="price">{{ favorite.price }}$</p>
+              <p class="favorite-container-desc">{{ favorite.description }}</p>
+              <p><button>Remove</button></p>
+            </div>
+          </div>
         </div>
+        <div v-else class="empty-container-text">Favorite Item is Empty</div>
       </div>
-      <div v-else class="empty-container-text">Favorite Item is Empty</div>
     </section>
   </body>
 </template>
@@ -51,17 +55,41 @@ export default {
   },
   computed: {
     ...mapGetters(["_getCurrentUser", "_userFavorites"]),
+
+    alreadyInFav() {
+      console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "already in fav id");
+      return this._userFavorites?.indexOf(JSON.parse(JSON.stringify(this.detailList[0].id))) > -1;
+    },
   },
 };
 </script>
 
 <style>
 .favorite-section {
-  width: 80%;
-  margin: auto;
+  width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   flex-wrap: wrap;
+  justify-content: center;
+  margin: auto;
+  text-transform: capitalize;
+}
+
+.favorite-item-iterate {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  justify-content: center;
+}
+
+.favorite-container-descriptions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.favorite-container-desc {
+  padding: 10px;
 }
 
 .empty-container-text {
@@ -70,10 +98,12 @@ export default {
 }
 
 .card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  width: 100%;
-  max-width: 400px;
-  margin: 30px;
+  width: 300px;
   text-align: center;
   font-family: "Montserrat", sans-serif;
 }
@@ -97,6 +127,7 @@ export default {
 
 .favorite-image {
   min-height: 350px;
+  width: 300px;
 }
 
 .card button:hover {
