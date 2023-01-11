@@ -15,8 +15,12 @@
         <router-link to="/cart">Cart</router-link>
       </div>
       <div class="router-link">
+        <router-link to="/favorite" v-if="_isAuthenticated">Favorites</router-link>
+      </div>
+      <div class="router-link">
         <router-link to="/about">About</router-link>
       </div>
+
       <div class="router-link" v-if="_isAuthenticated">
         <a @click="onLogout">Logout</a>
       </div>

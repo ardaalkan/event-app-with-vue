@@ -96,6 +96,10 @@ export default {
 </script>
 
 <style>
+body {
+  height: 100%;
+}
+
 .products-filter-container {
   display: flex;
   flex-direction: row;

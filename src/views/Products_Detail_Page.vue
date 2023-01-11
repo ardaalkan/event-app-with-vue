@@ -315,7 +315,8 @@ hr {
 }
 
 .favorite-item-active {
-  background-color: rgb(0, 238, 0);
+  background-color: rgb(0, 177, 0);
+  transition: 0.15s;
 }
 
 /* .product-detail-button:hover {

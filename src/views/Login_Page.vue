@@ -64,7 +64,7 @@ export default {
   width: 40%;
   margin: auto;
   justify-content: center;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* Full-width input fields */

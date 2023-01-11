@@ -2,31 +2,9 @@
   <NavbarView />
   <h1 class="cart_text">Cart page</h1>
   <div class="body-container">
-    <!-- Basket -->
-    <!-- <div class="basket-container">
-      <div class="basket-count">
-        <p>0</p>
-      </div>
-      <div class="basket-icon">
-        <span class="oi oi-box"></span>
-      </div>
-      <div class="basket-content">
-        <h3>Products</h3>
-        <div class="basket-products">
-          <ul></ul>
-        </div>
-        <p class="basket-total">TOTAL:</p>
-        <p class="basket-total-amount">&euro; 0</p>
-        <div class="clear"></div>
-        <button class="basket-checkout">CHECKOUT</button>
-      </div>
-    </div> -->
     <div class="price-counter">
       <h2>Item Counter - {2} && Total Price {300}</h2>
     </div>
-
-    <!-- Top Header -->
-
     <div class="products">
       <div class="product">
         <img src="http://via.placeholder.com/100/ffffff" />
