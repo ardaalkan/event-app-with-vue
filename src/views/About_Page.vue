@@ -7,48 +7,74 @@
       <h1>Send Ticket</h1>
       <p>Please fill in this form to create an ticket.</p>
       <hr />
-      <label for="email"><b>Name</b></label
-      ><small v-if="v$.name.$error">this field cannot be empty</small>
-      <input type="text" placeholder="Enter Name" name="name" id="name" v-model="state.name" />
-
+      <label for="email"><b>Name</b></label>
+      <br />
+      <small v-if="v$.form.name.$error && submitted">Name doesnt exists.</small>
+      <input type="text" placeholder="Enter Name" name="name" id="name" @blur="v$.form.name.$touch()" :class="{ 'is-valid': v$.form.name.$error }" />
       <label for="psw"><b>Username</b></label>
-      <input type="text" placeholder="Enter Password" name="psw" id="psw" />
-
+      <br />
+      <small v-if="v$.form.surname.$error && submitted">Name doesnt exists.</small>
+      <input
+        type="text"
+        placeholder="Enter Password"
+        name="psw"
+        id="psw"
+        @blur="v$.form.surname.$touch()"
+        :class="{ 'is-valid ': v$.form.surname.$error }"
+      />
+      <br />
       <label for="psw-repeat"><b>Contact / Description</b></label>
-      <input class="textarea-input" type="text" placeholder="Text area" name="psw-repeat" id="psw-repeat" />
+      <br />
+      <small v-if="v$.form.description.$invalid">At least 41 characters must be written.</small>
+      <input class="textarea-input" type="text" placeholder="Text area" name="psw-repeat" id="psw-repeat" v-model="form.description" />
       <hr />
-
       <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
       <button class="sendbtn">Submit</button>
+      <!-- {{ v$.form.description.required.$invalid }} -->
     </div>
   </form>
 </template>
 
 <script>
-import { reactive, computed } from "vue";
-import useVuelidate from "@vuelidate/core";
-import { required } from "@vuelidate/validators";
+// import { reactive } from "vue";
+import useValidate from "@vuelidate/core";
+import { required, minLength } from "@vuelidate/validators";
+
 export default {
   setup() {
-    const state = reactive({
-      name: "",
-      username: "",
-      description: "",
-    });
-    const rules = computed(() => {
-      return {
-        name: { required },
-        email: { required },
-        description: { required },
-      };
-    });
-    const v$ = useVuelidate(rules, state);
-    const submitForm = async () => {
-      const isFormCorrect = await v$.value.$validate();
-      if (!isFormCorrect) return;
-      alert("passed");
+    return {
+      v$: useValidate(),
     };
-    return { state, v$, submitForm };
+  },
+
+  data() {
+    return {
+      form: {
+        name: null,
+        surname: null,
+        description: null,
+      },
+      submitted: false,
+    };
+  },
+
+  validations() {
+    return {
+      form: {
+        name: { required },
+        surname: { required },
+        description: {
+          minLength: minLength(41),
+          required,
+        },
+      },
+    };
+  },
+
+  methods: {
+    submitForm() {
+      this.submitted = true;
+    },
   },
 };
 </script>
@@ -72,16 +98,23 @@ export default {
   height: 100px;
 }
 
+.textarea-input {
+  margin: 30px;
+  height: 100px;
+}
+
 /* Full-width input fields */
 input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 15px;
-  margin: 5px 0 22px 0;
+  margin: 5px 0 15px 0;
   display: inline-block;
   border: none;
   background: #f1f1f1;
 }
+
+/* Full-width input fields */
 
 input[type="text"]:focus,
 input[type="password"]:focus {
