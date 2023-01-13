@@ -7,26 +7,25 @@
       <h1>Send Ticket</h1>
       <p>Please fill in this form to create an ticket.</p>
       <hr />
+      <!-- Name -->
       <label for="email"><b>Name</b></label>
       <br />
-      <small v-if="v$.form.name.$error && submitted">Name doesnt exists.</small>
-      <input type="text" placeholder="Enter Name" name="name" id="name" @blur="v$.form.name.$touch()" :class="{ 'is-valid': v$.form.name.$error }" />
+      <small class="form-valid-error" v-if="v$.form.name.$error">Name doesnt exists.</small>
+      <input type="text" placeholder="Enter Name" name="name" id="name" v-model="form.name" @input="v$.form.name.$touch()" />
+      <!-- Name -->
+      <!-- Surname -->
       <label for="psw"><b>Username</b></label>
       <br />
-      <small v-if="v$.form.surname.$error && submitted">Name doesnt exists.</small>
-      <input
-        type="text"
-        placeholder="Enter Password"
-        name="psw"
-        id="psw"
-        @blur="v$.form.surname.$touch()"
-        :class="{ 'is-valid ': v$.form.surname.$error }"
-      />
+      <small class="form-valid-error" v-if="v$.form.surname.$error">Name doesnt exists.</small>
+      <input type="text" placeholder="Enter Surname" name="surname" id="surname" v-model="form.surname" @input="v$.form.surname.$touch()" />
+      <!-- Surname -->
       <br />
+      <!-- Description -->
       <label for="psw-repeat"><b>Contact / Description</b></label>
       <br />
-      <small v-if="v$.form.description.$invalid">At least 41 characters must be written.</small>
-      <input class="textarea-input" type="text" placeholder="Text area" name="psw-repeat" id="psw-repeat" v-model="form.description" />
+      <small class="form-valid-error" v-if="v$.form.description.$invalid">At least 41 characters must be written.</small>
+      <input class="textarea-input" type="text" placeholder="Text area" name="description" id="description" v-model="form.description" />
+      <!-- Description -->
       <hr />
       <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
       <button class="sendbtn">Submit</button>
@@ -101,6 +100,10 @@ export default {
 .textarea-input {
   margin: 30px;
   height: 100px;
+}
+
+.form-valid-error {
+  color: rgb(255, 82, 82);
 }
 
 /* Full-width input fields */
