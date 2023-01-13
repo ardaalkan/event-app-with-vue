@@ -11,13 +11,20 @@
       <label for="email"><b>Name</b></label>
       <br />
       <small class="form-valid-error" v-if="v$.form.name.$error">Name doesnt exists.</small>
-      <input type="text" placeholder="Enter Name" name="name" id="name" v-model="form.name" @input="v$.form.name.$touch()" />
+      <input
+        type="text"
+        placeholder="Enter Name"
+        name="name"
+        id="name"
+        v-model="v$.form.name.$model"
+        :class="{ 'is-invalid': v$.form.name.$error }"
+      />
       <!-- Name -->
       <!-- Surname -->
       <label for="psw"><b>Username</b></label>
       <br />
-      <small class="form-valid-error" v-if="v$.form.surname.$error">Name doesnt exists.</small>
-      <input type="text" placeholder="Enter Surname" name="surname" id="surname" v-model="form.surname" @input="v$.form.surname.$touch()" />
+      <small class="form-valid-error" v-if="v$.form.surname.$error">Surname doesnt exists.</small>
+      <input type="text" placeholder="Enter Surname" name="surname" id="surname" v-model="v$.form.surname.$model" />
       <!-- Surname -->
       <br />
       <!-- Description -->
@@ -29,7 +36,6 @@
       <hr />
       <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
       <button class="sendbtn">Submit</button>
-      <!-- {{ v$.form.description.required.$invalid }} -->
     </div>
   </form>
 </template>
@@ -73,6 +79,7 @@ export default {
   methods: {
     submitForm() {
       this.submitted = true;
+      alert("Submitted.");
     },
   },
 };
@@ -103,7 +110,8 @@ export default {
 }
 
 .form-valid-error {
-  color: rgb(255, 82, 82);
+  color: rgb(163, 163, 163);
+  font-size: 11px;
 }
 
 /* Full-width input fields */

@@ -129,6 +129,21 @@
         1,
         2
       ]
+    },
+    {
+      "username": "arda5",
+      "fullname": "arda5",
+      "password": "86aa75dc5de59513a3a041aa7195f7c40788ebe2",
+      "id": 3
+    },
+    {
+      "username": "abc1",
+      "fullname": "abc1",
+      "password": "013b1f3ebed29a5a388bb8de3ad3244a11b9e74b",
+      "id": 4,
+      "favorites": [
+        5
+      ]
     }
   ]
 }

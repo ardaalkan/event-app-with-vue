@@ -1,20 +1,28 @@
 <template>
-  <div action="action">
+  <form action="action">
     <div class="container_register">
       <h1>Register</h1>
       <p>Please fill in this form to create an account.</p>
       <hr />
 
-      <label for="email"><b>Name</b></label>
-      <input v-model="userData.fullname" type="text" placeholder="Enter Name" name="name" id="name" required />
+      <label for="text"><b>Username</b></label>
+      <br />
+      <small v-if="v$.form.username.$error">Name must be exists.</small>
+      <!-- @input="v$.form.name.$touch()" -->
+      <input v-model="v$.form.username.$model" type="text" placeholder="* Enter Name" name="username" id="username" autofocus />
 
-      <label for="psw"><b>Username</b></label>
-      <input v-model="userData.username" type="text" placeholder="Enter Password" name="psw" id="psw" required />
+      <label for="psw"><b>Name</b></label>
+      <br />
+      <small v-if="v$.form.fullname.$error">Fullname must be exists.</small>
+      <input v-model="v$.form.fullname.$model" type="text" placeholder="* Enter fullname" name="psw" id="psw" />
 
       <label for="psw-repeat"><b>Password</b></label>
-      <input v-model="userData.password" type="password" placeholder="Repeat Password" name="psw-repeat" id="psw-repeat" required />
+      <br />
+      <small v-if="v$.form.password.$error">
+        Your password must be 3 or more characters, and include at least one lowercase letter, one uppercase letter, and a number</small
+      >
+      <input v-model="v$.form.password.$model" type="password" placeholder="* Repeat Password" name="psw-repeat" id="psw-repeat" />
       <hr />
-
       <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
       <button class="registerbtn" @click="onSave()">Register</button>
     </div>
@@ -22,16 +30,43 @@
     <div class="container_signin">
       <p>Already have an account? <router-link :to="{ name: 'Login' }">Giriş Yap</router-link></p>
     </div>
-  </div>
+  </form>
+  <!-- {{ v$.form.password.$invalid }} -->
 </template>
 
 <script>
 import CryptoJS from "crypto-js";
+import useValidate from "@vuelidate/core";
+import { required, minLength } from "@vuelidate/validators";
 
 export default {
+  setup() {
+    return {
+      v$: useValidate(),
+    };
+  },
+
+  validations() {
+    return {
+      form: {
+        username: { required },
+        fullname: { required },
+        password: {
+          minLength: minLength(3),
+          required,
+          valid: function (value) {
+            const constrainsUppercase = /[A-Z]/.test(value);
+            const constrainsLowercase = /[a-z]/.test(value);
+            const constrainsNumber = /[0-9]/.test(value);
+            return constrainsUppercase && constrainsLowercase && constrainsNumber;
+          },
+        },
+      },
+    };
+  },
   data() {
     return {
-      userData: {
+      form: {
         username: null,
         fullname: null,
         password: null,
@@ -40,17 +75,17 @@ export default {
   },
   methods: {
     onSave() {
-      const password = this.userData.password;
+      const password = this.form.password;
       const key = "booklike123!456";
       const cryptedPassword = CryptoJS.HmacSHA1(password, key).toString();
 
-      this.$appAxios.post("/users", { ...this.userData, password: cryptedPassword }).then((registered_user_response) => {
+      this.$appAxios.post("/users", { ...this.form, password: cryptedPassword }).then((registered_user_response) => {
         console.log("registered_user_response :>>", registered_user_response);
         this.$router.push({ name: "Home" });
       });
 
       console.log(cryptedPassword);
-      // console.log(this.userData);
+      // console.log(this.form);
     },
   },
 };

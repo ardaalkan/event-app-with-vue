@@ -6,16 +6,20 @@
       <hr />
 
       <label for="username"><b>Username</b></label>
-      <input v-model="userData.username" type="text" placeholder="Enter Username" name="username" id="username" required />
-
+      <br />
+      <small v-if="v$.form.username.$error">Username must be exists.</small>
+      <input v-model="v$.form.username.$model" type="text" placeholder="Enter Username" name="username" id="username" required />
+      <br />
+      <small v-if="v$.form.password.$error">
+        Your password must be 3 or more characters, and include at least one lowercase letter, one uppercase letter, and a number</small
+      >
       <label for="psw"><b>Password</b></label>
-      <input v-model="userData.password" type="password" placeholder="Enter Password" name="psw" id="psw" required />
+      <input v-model="v$.form.password.$model" type="password" placeholder="Enter Password" name="psw" id="psw" required />
+      <br />
       <hr />
-
       <router-link :to="{ name: 'Register' }">Register</router-link>
       <button class="registerbtn" @click="onSubmit()">Login</button>
     </div>
-
     <!-- <div class="container signin">
       <p>Already have an account? <a href="#">Sign in</a>.</p>
     </div> -->
@@ -24,10 +28,37 @@
 
 <script>
 import CryptoJS from "crypto-js";
+import useValidate from "@vuelidate/core";
+import { required, minLength } from "@vuelidate/validators";
 export default {
+  setup() {
+    return {
+      v$: useValidate(),
+    };
+  },
+
+  validations() {
+    return {
+      form: {
+        username: { required },
+        fullname: { required },
+        password: {
+          minLength: minLength(3),
+          required,
+          valid: function (value) {
+            const constrainsUppercase = /[A-Z]/.test(value);
+            const constrainsLowercase = /[a-z]/.test(value);
+            const constrainsNumber = /[0-9]/.test(value);
+            return constrainsUppercase && constrainsLowercase && constrainsNumber;
+          },
+        },
+      },
+    };
+  },
+
   data() {
     return {
-      userData: {
+      form: {
         username: null,
         password: null,
       },
@@ -35,9 +66,9 @@ export default {
   },
   methods: {
     onSubmit() {
-      const password = CryptoJS.HmacSHA1(this.userData.password, this.$store.getters._saltKey).toString();
+      const password = CryptoJS.HmacSHA1(this.form.password, this.$store.getters._saltKey).toString();
       this.$appAxios
-        .get(`/users?username=${this.userData.username}&password=${password}`)
+        .get(`/users?username=${this.form.username}&password=${password}`)
         .then((login_response) => {
           if (login_response?.data?.length > 0) {
             this.$store.commit("setUser", login_response?.data[0]);
