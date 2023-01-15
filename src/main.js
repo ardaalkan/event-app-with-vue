@@ -10,6 +10,7 @@ import "vuetify/styles";
 import { createVuetify } from "vuetify";
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
+import Toaster from "@meforma/vue-toaster";
 
 const app = createApp(App);
 const vuetify = createVuetify({
@@ -21,6 +22,7 @@ app.component("FooterView", FooterView);
 app.use(router);
 app.use(store);
 app.use(vuetify);
+app.use(Toaster);
 app.mount("#app");
 // createApp(App).use(vuetify).mount('#app')
 app.config.globalProperties.$appAxios = appAxios;

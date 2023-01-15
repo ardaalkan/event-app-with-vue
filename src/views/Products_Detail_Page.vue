@@ -15,36 +15,6 @@
       <hr />
       <!-- <small>You must be logged in to see the size</small> -->
       <div class="detail-page-event-container">
-        <details class="custom-select-detail-page">
-          <summary class="detail-page-radios">
-            <input type="radio" name="item" id="default" title="What Size?" checked />
-            <input type="radio" name="item" id="item1" title="Item 1" />
-            <input type="radio" name="item" id="item2" title="Item 2" />
-            <input type="radio" name="item" id="item3" title="Item 3" />
-            <input type="radio" name="item" id="item4" title="Item 4" />
-            <input type="radio" name="item" id="item5" title="Item 5" />
-          </summary>
-          <ul class="list">
-            <li>
-              <label for="item1">
-                Item 1
-                <span></span>
-              </label>
-            </li>
-            <li>
-              <label for="item2">Item 2</label>
-            </li>
-            <li>
-              <label for="item3">Item 3</label>
-            </li>
-            <li>
-              <label for="item4">Item 4</label>
-            </li>
-            <li>
-              <label for="item5">Item 5</label>
-            </li>
-          </ul>
-        </details>
         <div class="product-detail-event-buttons">
           <button class="product-detail-button">
             <span @click="saveCart">Add basket</span>
@@ -91,6 +61,7 @@ export default {
         // let arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].id)));
         // console.log(arr, "hey");
         // console.log(arr[0].id);
+        console.log(this.detailList[0].id);
       });
     },
     saveFavorites() {
@@ -99,8 +70,10 @@ export default {
 
       if (!this.alreadyInFav) {
         favorites = [...favorites, arr];
+        this.$toast.success(`Added your favorite page...`);
       } else {
         favorites = favorites.filter((l) => l !== arr);
+        this.$toast.info(`Removed from favorites page...`);
       }
 
       this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, { favorites }).then((cart_response) => {

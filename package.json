@@ -10,6 +10,7 @@
     "dev": "concurrently \"npm run start-api\" \"npm run serve\""
   },
   "dependencies": {
+    "@meforma/vue-toaster": "^1.3.0",
     "@vuelidate/core": "^2.0.0",
     "@vuelidate/validators": "^2.0.0",
     "axios": "^1.2.1",

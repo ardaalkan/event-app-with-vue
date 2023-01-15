@@ -112,10 +112,65 @@
       "password": "6ab4adb5c2dc445d331c3af0a28ccd31730c5f95",
       "id": 1,
       "favorites": [
-        4,
+        {
+          "id": 1,
+          "category": "shoes",
+          "image": "https://images.meesho.com/images/products/158314560/2tqxc_256.jpg",
+          "name": "Hiker",
+          "price": 94.95,
+          "skus": [
+            {
+              "sku": "17",
+              "size": 7
+            },
+            {
+              "sku": "18",
+              "size": 8
+            }
+          ],
+          "description": "This is Beast! You Should Use That Whenever You Want"
+        },
+        {
+          "id": 2,
+          "category": "shoes",
+          "image": "https://images.meesho.com/images/products/75116716/o63wu_256.jpg",
+          "name": "Climber",
+          "price": 78.99,
+          "skus": [
+            {
+              "sku": "28",
+              "size": 8
+            },
+            {
+              "sku": "29",
+              "size": 9
+            }
+          ],
+          "description": "Sure-footed traction in slippery conditions."
+        },
+        {
+          "id": 3,
+          "category": "shoes",
+          "image": "https://images.meesho.com/images/products/70701211/bpmiw_512.webp",
+          "name": "Explorer",
+          "price": 145.95,
+          "skus": [
+            {
+              "sku": "37",
+              "size": 7
+            },
+            {
+              "sku": "38",
+              "size": 8
+            },
+            {
+              "sku": "39",
+              "size": 9
+            }
+          ],
+          "description": "Look stylish while stomping in the mud."
+        },
         5,
-        1,
-        3,
         2
       ],
       "mark": []
@@ -127,7 +182,8 @@
       "id": 2,
       "favorites": [
         1,
-        2
+        3,
+        5
       ]
     },
     {

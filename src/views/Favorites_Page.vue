@@ -10,7 +10,7 @@
               <h1>{{ favorite.category }}</h1>
               <p class="price">{{ favorite.price }}$</p>
               <p class="favorite-container-desc">{{ favorite.description }}</p>
-              <p><button>Remove</button></p>
+              <!-- <p><button @click="removeFavorites">Remove</button></p> -->
             </div>
           </div>
         </div>
@@ -52,6 +52,18 @@ export default {
         });
       });
     },
+    // removeFavorites() {
+    //   const arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].id)));
+    //   let favorites = [...this._userFavorites];
+
+    //   favorites = favorites.filter((l) => l !== arr);
+    //   console.log(arr, "arr");
+    //   this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, { favorites }).then((cart_response) => {
+    //     console.log(cart_response);
+    //     this.$store.commit("setFavorite", favorites);
+    //   });
+    // },
+    // To the user's favorites array with the "arr" parameter 2
   },
   computed: {
     ...mapGetters(["_getCurrentUser", "_userFavorites"]),

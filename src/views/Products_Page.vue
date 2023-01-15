@@ -5,36 +5,15 @@
     <!-- TODO: Filtering Component -->
     <!-- TODO: Filtering Component -->
     <div class="products-filter-container">
-      <details class="custom-select">
-        <summary class="radios">
-          <input type="radio" name="item" id="default" title="Filter by size" checked />
-          <input type="radio" name="item" id="item1" title="Item 1" />
-          <input type="radio" name="item" id="item2" title="Item 2" />
-          <input type="radio" name="item" id="item3" title="Item 3" />
-          <input type="radio" name="item" id="item4" title="Item 4" />
-          <input type="radio" name="item" id="item5" title="Item 5" />
-        </summary>
-        <ul class="list">
-          <li>
-            <label for="item1">
-              Item 1
-              <span></span>
-            </label>
-          </li>
-          <li>
-            <label for="item2">Item 2</label>
-          </li>
-          <li>
-            <label for="item3">Item 3</label>
-          </li>
-          <li>
-            <label for="item4">Item 4</label>
-          </li>
-          <li>
-            <label for="item5">Item 5</label>
-          </li>
-        </ul>
-      </details>
+      <span> Selected: {{ selected }}</span>
+      <select v-model="selected">
+        <option value="">Please select one</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+      </select>
     </div>
     <!-- TODO: Filtering Component -->
     <!-- TODO: Filtering Component -->
@@ -69,7 +48,7 @@ export default {
   data() {
     return {
       categoryList: [],
-      category: {},
+      selected: "",
     };
   },
 
@@ -86,10 +65,14 @@ export default {
       let param = this.$route.params;
       this.$appAxios.get(`/products?category=${param.products}`).then((category_response) => {
         this.categoryList = category_response?.data || [];
-        console.log(this.categoryList?.length);
-        // console.log(category_response.data);
-        // console.log(this.$route.params.products);
+        console.log(JSON.parse(JSON.stringify(...this.categoryList)), "product-page");
       });
+    },
+  },
+
+  computed: {
+    filtered() {
+      return this.categoryList.filter((item) => item.skus === this.selected);
     },
   },
 };
