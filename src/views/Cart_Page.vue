@@ -5,22 +5,91 @@
     <div class="price-counter">
       <h2>Item Counter - {2} && Total Price {300}</h2>
     </div>
-    <div class="products">
-      <div class="product">
-        <img src="http://via.placeholder.com/100/ffffff" />
-        <h2>Horizon | Backpacks &euro; 100,-</h2>
-        <p>Best backpacks from horizon..!</p>
-        <div class="clear"></div>
-        <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">+</button>
-        <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">-</button>
+    <div class="price-container">
+      <div class="products">
+        <div class="product">
+          <img src="http://via.placeholder.com/100/ffffff" />
+          <h2>Horizon | Backpacks &euro; 100,-</h2>
+          <p>Best backpacks from horizon..!</p>
+          <div class="clear"></div>
+          <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">+</button>
+          <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">-</button>
+        </div>
+      </div>
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <p>Product Total: 444$</p>
+        <p>Total: 444$</p>
       </div>
     </div>
   </div>
 </template>
 
-<scrip></scrip>
+<script>
+import { mapGetters } from "vuex";
+
+export default {
+  data() {
+    return {
+      detailList: "",
+      cartList: [],
+    };
+  },
+
+  created() {
+    this.cartId();
+  },
+
+  methods: {
+    cartId() {
+      this.$appAxios.get(`users?username=${this._getCurrentUser.fullname}`).then((res) => {
+        this.detailList = res?.data || [];
+        let arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].favorites)));
+        // console.log(arr, "favorite id");
+        arr.map((arr) => {
+          this.$appAxios.get(`/products?id=${arr}`).then((arr_response) => {
+            arr_response.data.push(...this.favoriteList);
+            this.favoriteList = arr_response?.data || [];
+            // console.log(arr_response.data, "data");
+            // console.log(arr_response, "arr_response_Here");
+            // console.log(this.favoriteList.length, "favorite-list-length");
+          });
+        });
+      });
+    },
+
+  computed: {
+    ...mapGetters(["_getCurrentUser", "_userCarts"]),
+
+    alreadyInFav() {
+      console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "already in cart id");
+      return this._userFavorites?.indexOf(JSON.parse(JSON.stringify(this.detailList[0].id))) > -1;
+    },
+  },
+};
+</script>
 
 <style>
+.order-summary {
+  margin: 15px;
+  margin-top: 35px;
+  background-color: rgb(245, 245, 245);
+  max-height: 200px;
+  min-width: 350px;
+  position: sticky;
+  top: 10px;
+  border-style: solid;
+  border-width: 1px;
+  padding: 5px;
+  border-color: rgb(230, 230, 230);
+}
+
+.price-container {
+  display: flex;
+  width: 60%;
+  margin: auto;
+}
+
 .cart_text {
   display: flex;
   justify-content: center;
@@ -37,7 +106,7 @@
 .body-container .products .product {
   background-color: #009b77;
   color: white;
-  margin: 25px 0px;
+  margin: 35px 0px;
   padding: 15px;
 }
 .body-container .products .product img {
@@ -55,7 +124,6 @@
 }
 .body-container .products .product button:hover {
   background-color: #2a3f63;
-
   cursor: pointer;
 }
 .body-container .basket-container {
@@ -80,6 +148,8 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
+  background-color: rgb(245, 245, 245);
+  padding: 10px;
 }
 
 /* .body-container .basket-container .basket-count {

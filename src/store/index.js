@@ -20,6 +20,10 @@ export default createStore({
       state.user.favorites = favoriteId;
       // console.log(favoriteId);
     },
+    setCart(state, cartId) {
+      state.user.carts = cartId;
+      // console.log(cartId);
+    },
   },
   getters: {
     _isAuthenticated: (state) => state.user !== null,
@@ -32,6 +36,7 @@ export default createStore({
       return user;
     },
     _userFavorites: (state) => state?.user?.favorites || [],
+    _userCarts: (state) => state?.user?.carts || [],
     _currentUserId: (state) => state?.user?.id,
     _saltKey: (state) => state.saltKey,
   },

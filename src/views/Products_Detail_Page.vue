@@ -16,8 +16,14 @@
       <!-- <small>You must be logged in to see the size</small> -->
       <div class="detail-page-event-container">
         <div class="product-detail-event-buttons">
-          <button class="product-detail-button">
-            <span @click="saveCart">Add basket</span>
+          <button
+            class="product-detail-button"
+            @click="saveCarts"
+            :class="{
+              'cart-item-active': alreadyInCart,
+            }"
+          >
+            <span>Add basket</span>
           </button>
           <button
             class="product-detail-button"
@@ -43,7 +49,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      detailList: [],
+      detailList: null,
     };
   },
 
@@ -77,20 +83,42 @@ export default {
       }
 
       this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, { favorites }).then((cart_response) => {
-        // console.log(this._getCurrentUser.id);
         console.log(cart_response);
-        // console.log(this.detailList, `hey`);
         console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "this.arr");
         this.$store.commit("setFavorite", favorites);
       });
     },
+
+    saveCarts() {
+      const arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].id)));
+      let carts = [...this._userCarts];
+
+      if (!this.alreadyInCart) {
+        carts = [...carts, arr];
+        this.$toast.success(`Added your carts page...`);
+      } else {
+        carts = carts.filter((l) => l !== arr);
+        this.$toast.info(`Removed from carts page...`);
+      }
+
+      this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, { carts }).then((cart_response) => {
+        console.log(cart_response);
+        console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "this.arr");
+        this.$store.commit("setCart", carts);
+      });
+    },
   },
+
   computed: {
-    ...mapGetters(["_getCurrentUser", "_userFavorites"]),
+    ...mapGetters(["_getCurrentUser", "_userFavorites", "_userCarts"]),
 
     alreadyInFav() {
       console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "already in fav id");
       return this._userFavorites?.indexOf(JSON.parse(JSON.stringify(this.detailList[0].id))) > -1;
+    },
+    alreadyInCart() {
+      console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "already in cart id");
+      return this._userCarts?.indexOf(JSON.parse(JSON.stringify(this.detailList[0].id))) > -1;
     },
   },
 };
@@ -289,6 +317,11 @@ hr {
 
 .favorite-item-active {
   background-color: rgb(0, 177, 0);
+  transition: 0.15s;
+}
+
+.cart-item-active {
+  background-color: rgb(57, 44, 175);
   transition: 0.15s;
 }
 

@@ -4,7 +4,7 @@
     <!-- TODO: Filtering Component -->
     <!-- TODO: Filtering Component -->
     <!-- TODO: Filtering Component -->
-    <div class="products-filter-container">
+    <!-- <div class="products-filter-container">
       <span> Selected: {{ selected }}</span>
       <select v-model="selected">
         <option value="">Please select one</option>
@@ -14,7 +14,7 @@
         <option value="10">10</option>
         <option value="11">11</option>
       </select>
-    </div>
+    </div> -->
     <!-- TODO: Filtering Component -->
     <!-- TODO: Filtering Component -->
     <!-- TODO: Filtering Component -->

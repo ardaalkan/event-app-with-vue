@@ -26,7 +26,7 @@ import { mapGetters } from "vuex";
 export default {
   data() {
     return {
-      detailList: [],
+      detailList: "",
       favoriteList: [],
     };
   },
