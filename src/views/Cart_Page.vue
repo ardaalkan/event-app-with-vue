@@ -7,11 +7,11 @@
     </div>
     <div class="price-container">
       <div class="products">
-        <div class="product">
-          <img src="http://via.placeholder.com/100/ffffff" />
-          <h2>Horizon | Backpacks &euro; 100,-</h2>
-          <p>Best backpacks from horizon..!</p>
-          <div class="clear"></div>
+        <div class="product" v-for="cartItem in cartList" :key="cartItem.id" value="cartItem">
+          <img :src="cartItem.image" />
+          <h2 class="cart-item-category-text">{{ cartItem.category }}</h2>
+          <p class="cart-item-category-description">{{ cartItem.description }}</p>
+          <p class="cart-item-category-price">Price: {{ cartItem.price }}&nbsp;$</p>
           <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">+</button>
           <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">-</button>
         </div>
@@ -44,12 +44,12 @@ export default {
     cartId() {
       this.$appAxios.get(`users?username=${this._getCurrentUser.fullname}`).then((res) => {
         this.detailList = res?.data || [];
-        let arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].favorites)));
+        let arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].carts)));
         // console.log(arr, "favorite id");
         arr.map((arr) => {
           this.$appAxios.get(`/products?id=${arr}`).then((arr_response) => {
-            arr_response.data.push(...this.favoriteList);
-            this.favoriteList = arr_response?.data || [];
+            arr_response.data.push(...this.cartList);
+            this.cartList = arr_response?.data || [];
             // console.log(arr_response.data, "data");
             // console.log(arr_response, "arr_response_Here");
             // console.log(this.favoriteList.length, "favorite-list-length");
@@ -57,14 +57,18 @@ export default {
         });
       });
     },
-
+  },
   computed: {
     ...mapGetters(["_getCurrentUser", "_userCarts"]),
 
     alreadyInFav() {
       console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "already in cart id");
-      return this._userFavorites?.indexOf(JSON.parse(JSON.stringify(this.detailList[0].id))) > -1;
+      console.log(this._userCarts.length);
+      return this._userCarts?.indexOf(JSON.parse(JSON.stringify(this.detailList[0].id))) > -1;
     },
+    // cartLength(){
+
+    // },
   },
 };
 </script>
@@ -108,10 +112,18 @@ export default {
   color: white;
   margin: 35px 0px;
   padding: 15px;
+  width: 100%;
+  height: 200px;
 }
+
+.cart-item-category-text {
+  text-transform: uppercase;
+}
+
 .body-container .products .product img {
   float: left;
   margin: 0px 15px 0px 0px;
+  height: 100%;
 }
 .body-container .products .product button {
   margin: 15px 0px 0px 0px;
@@ -120,11 +132,18 @@ export default {
   border-radius: 10px;
   padding: 0px 15px;
   font-size: 30px;
-  margin-left: 5px;
+  margin-left: 2px;
+  box-shadow: 1px 1px 1px 1px rgba(75, 75, 75, 0.2);
 }
+
+.cart-item-category-price {
+  font-style: italic;
+}
+
 .body-container .products .product button:hover {
   background-color: #2a3f63;
   cursor: pointer;
+  transition: 0.3s;
 }
 .body-container .basket-container {
   position: fixed;

@@ -35,7 +35,7 @@
       <!-- Description -->
       <hr />
       <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
-      <button class="sendbtn">Submit</button>
+      <button class="sendbtn" @click="onRegisterTap">Submit</button>
     </div>
   </form>
 </template>
@@ -77,9 +77,19 @@ export default {
   },
 
   methods: {
-    submitForm() {
-      this.submitted = true;
-      alert("Submitted.");
+    onRegisterTap: function () {
+      if (!this.form.name) {
+        alert("Required name");
+        return;
+      }
+      if (!this.form.surname) {
+        alert("Required surname");
+        return;
+      }
+      if (!this.form.description || !this.form.description.minLength(41)) {
+        alert("Required description ");
+        return;
+      } else alert("submitted");
     },
   },
 };
