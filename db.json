@@ -121,16 +121,13 @@
       "fullname": "arda1",
       "password": "6ab4adb5c2dc445d331c3af0a28ccd31730c5f95",
       "id": 2,
-      "favorites": [
-        1,
-        3,
-        2,
-        5
-      ],
+      "favorites": [],
       "carts": [
-        2,
         5,
-        4
+        4,
+        3,
+        1,
+        2
       ]
     },
     {

@@ -10,7 +10,7 @@
               <h1>{{ favorite.category }}</h1>
               <p class="price">{{ favorite.price }}$</p>
               <p class="favorite-container-desc">{{ favorite.description }}</p>
-              <!-- <p><button @click="removeFavorites">Remove</button></p> -->
+              <p><button @click="removeFavorites(favorite)">Remove</button></p>
             </div>
           </div>
         </div>
@@ -52,24 +52,28 @@ export default {
         });
       });
     },
-    // removeFavorites() {
-    //   const arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].id)));
-    //   let favorites = [...this._userFavorites];
+    removeFavorites(favorite) {
+      let favorites = [...this._userFavorites];
 
-    //   favorites = favorites.filter((l) => l !== arr);
-    //   console.log(arr, "arr");
-    //   this.$appAxios.patch(`/users/${this._getCurrentUser.id}`, { favorites }).then((cart_response) => {
-    //     console.log(cart_response);
-    //     this.$store.commit("setFavorite", favorites);
-    //   });
-    // },
-    // To the user's favorites array with the "arr" parameter 2
+      if (this._userFavorites.indexOf(favorite.id) > -1) {
+        favorites = favorites.filter((l) => l !== favorite.id);
+        this.$toast.info(`Removed from favorites page...`);
+        this.$appAxios
+          .patch(`/users/${this._getCurrentUser.id}`, { favorites })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      this.$store.commit("setFavorite", favorites);
+    },
   },
   computed: {
     ...mapGetters(["_getCurrentUser", "_userFavorites"]),
 
     alreadyInFav() {
-      console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "already in fav id");
       return this._userFavorites?.indexOf(JSON.parse(JSON.stringify(this.detailList[0].id))) > -1;
     },
   },

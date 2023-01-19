@@ -18,8 +18,11 @@
       </div>
       <div class="order-summary">
         <h2>Order Summary</h2>
-        <p>Product Total: 444$</p>
-        <p>Total:{{ totalPrice }}</p>
+        <hr />
+        <div class="order-summary-prices">
+          <p>Product Total</p>
+          <p>Total:&nbsp;{{ totalPrice }} $</p>
+        </div>
       </div>
     </div>
   </div>
@@ -85,8 +88,17 @@ export default {
   top: 10px;
   border-style: solid;
   border-width: 1px;
-  padding: 5px;
+  padding: 15px;
   border-color: rgb(230, 230, 230);
+}
+
+.order-summary h2 {
+  padding-bottom: 10px;
+}
+
+.order-summary-prices {
+  padding-top: 10px;
+  font-size: bold;
 }
 
 .price-container {
