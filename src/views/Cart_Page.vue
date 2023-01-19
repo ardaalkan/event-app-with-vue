@@ -3,7 +3,7 @@
   <h1 class="cart_text">Cart page</h1>
   <div class="body-container">
     <div class="price-counter">
-      <h2>Item Counter - {2} && Total Price {300}</h2>
+      <p>{{ cartList.length }} <span>item in your cart</span></p>
     </div>
     <div class="price-container">
       <div class="products">
@@ -19,7 +19,7 @@
       <div class="order-summary">
         <h2>Order Summary</h2>
         <p>Product Total: 444$</p>
-        <p>Total: 444$</p>
+        <p>Total:{{ totalPrice }}</p>
       </div>
     </div>
   </div>
@@ -33,6 +33,8 @@ export default {
     return {
       detailList: "",
       cartList: [],
+      totalPrice: 0,
+      allPrice: [],
     };
   },
 
@@ -45,30 +47,29 @@ export default {
       this.$appAxios.get(`users?username=${this._getCurrentUser.fullname}`).then((res) => {
         this.detailList = res?.data || [];
         let arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].carts)));
-        // console.log(arr, "favorite id");
+        // console.log(arr, " // arr //");
         arr.map((arr) => {
           this.$appAxios.get(`/products?id=${arr}`).then((arr_response) => {
             arr_response.data.push(...this.cartList);
             this.cartList = arr_response?.data || [];
-            // console.log(arr_response.data, "data");
-            // console.log(arr_response, "arr_response_Here");
-            // console.log(this.favoriteList.length, "favorite-list-length");
+            let priceObject = JSON.parse(JSON.stringify(...this.cartList));
+            this.allPrice.push(priceObject.price);
+            this.calculateTotal();
           });
         });
       });
+    },
+    calculateTotal() {
+      this.totalPrice = this.allPrice.reduce((a, b) => a + b, 0);
     },
   },
   computed: {
     ...mapGetters(["_getCurrentUser", "_userCarts"]),
 
-    alreadyInFav() {
+    alreadyInCarts() {
       console.log(JSON.parse(JSON.stringify(this.detailList[0].id)), "already in cart id");
-      console.log(this._userCarts.length);
       return this._userCarts?.indexOf(JSON.parse(JSON.stringify(this.detailList[0].id))) > -1;
     },
-    // cartLength(){
-
-    // },
   },
 };
 </script>
