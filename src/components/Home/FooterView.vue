@@ -4,9 +4,9 @@
   </div>
 </template>
 
-<scrip>
+<script>
 
-</scrip>
+</script>
 
 <style>
 .footer {

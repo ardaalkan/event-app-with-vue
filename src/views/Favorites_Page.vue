@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";  
 
 export default {
   data() {
@@ -40,11 +40,12 @@ export default {
       this.$appAxios.get(`users?username=${this._getCurrentUser.fullname}`).then((res) => {
         this.detailList = res?.data || [];
         let arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].favorites)));
-        // console.log(arr, "favorite id");
+        console.log(arr, "favorite id");
         arr.map((arr) => {
           this.$appAxios.get(`/products?id=${arr}`).then((arr_response) => {
             arr_response.data.push(...this.favoriteList);
             this.favoriteList = arr_response?.data || [];
+
             // console.log(arr_response.data, "data");
             // console.log(arr_response, "arr_response_Here");
             // console.log(this.favoriteList.length, "favorite-list-length");
@@ -54,7 +55,7 @@ export default {
     },
     removeFavorites(favorite) {
       let favorites = [...this._userFavorites];
-
+      console.log(favorite.id, 'favorite-id')
       if (this._userFavorites.indexOf(favorite.id) > -1) {
         favorites = favorites.filter((l) => l !== favorite.id);
         this.$toast.info(`Removed from favorites page...`);
@@ -68,6 +69,7 @@ export default {
           });
       }
       this.$store.commit("setFavorite", favorites);
+      this.$router.go()
     },
   },
   computed: {

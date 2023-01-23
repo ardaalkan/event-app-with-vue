@@ -5,15 +5,19 @@
     <div class="price-counter">
       <p>{{ cartList.length }} <span>item in your cart</span></p>
     </div>
-    <div class="price-container">
+    <div class="price-container" v-if="cartList.length">
       <div class="products">
         <div class="product" v-for="cartItem in cartList" :key="cartItem.id" value="cartItem">
           <img :src="cartItem.image" />
-          <h2 class="cart-item-category-text">{{ cartItem.category }}</h2>
+          <div class="cart-item-category">
+            <h2>{{ cartItem.category }}</h2>
+            <CloseSvg @click="removeCarts(cartItem)" />
+          </div>
           <p class="cart-item-category-description">{{ cartItem.description }}</p>
           <p class="cart-item-category-price">Price: {{ cartItem.price }}&nbsp;$</p>
-          <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">+</button>
-          <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">-</button>
+          <!-- <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">+</button>
+          <span class="basket-counter" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">1</span>
+          <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">-</button> -->
         </div>
       </div>
       <div class="order-summary">
@@ -25,13 +29,19 @@
         </div>
       </div>
     </div>
+    <div class="empty-container-text" v-else>Cart Item is Empty</div>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
+import CloseSvg from "@/components/Home/CloseSvg.vue";
 
 export default {
+  components: {
+    CloseSvg,
+  },
+
   data() {
     return {
       detailList: "",
@@ -62,6 +72,27 @@ export default {
         });
       });
     },
+
+    removeCarts(cartItem) {
+      let carts = [...this._userCarts];
+      if (this._userCarts.indexOf(cartItem.id) > -1) {
+        carts = carts.filter((l) => l !== cartItem.id);
+        this.$toast.info(`Removed from favorites page...`);
+        this.$appAxios
+          .patch(`/users/${this._getCurrentUser.id}`, { carts })
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+      console.log(cartItem.id, "cartItem-id");
+
+      this.$store.commit("setCart", carts);
+      this.$router.go();
+    },
+
     calculateTotal() {
       this.totalPrice = this.allPrice.reduce((a, b) => a + b, 0);
     },
@@ -78,6 +109,11 @@ export default {
 </script>
 
 <style>
+.empty-container-text {
+  padding: 50px;
+  font-size: 30px;
+}
+
 .order-summary {
   margin: 15px;
   margin-top: 35px;
@@ -129,7 +165,13 @@ export default {
   height: 200px;
 }
 
-.cart-item-category-text {
+.cart-item-category {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cart-item-category h2 {
   text-transform: uppercase;
 }
 
@@ -149,12 +191,23 @@ export default {
   box-shadow: 1px 1px 1px 1px rgba(75, 75, 75, 0.2);
 }
 
+.basket-counter {
+  margin: 15px 0px 0px 0px;
+  background-color: transparent;
+  color: white;
+  border-radius: 10px;
+  padding: 0px 15px;
+  font-size: 30px;
+  margin-left: 2px;
+  box-shadow: transparent;
+}
+
 .cart-item-category-price {
   font-style: italic;
 }
 
 .body-container .products .product button:hover {
-  background-color: #2a3f63;
+  background-color: #4e4e4e;
   cursor: pointer;
   transition: 0.3s;
 }

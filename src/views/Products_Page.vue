@@ -1,9 +1,6 @@
 <template>
   <body>
     <NavbarView />
-    <!-- TODO: Filtering Component -->
-    <!-- TODO: Filtering Component -->
-    <!-- TODO: Filtering Component -->
     <!-- <div class="products-filter-container">
       <span> Selected: {{ selected }}</span>
       <select v-model="selected">
@@ -13,20 +10,21 @@
         <option value="9">9</option>
         <option value="10">10</option>
         <option value="11">11</option>
+        <option value="12">12</option>
+        <option value="13">13</option>
+        <option value="14">14</option>
+        <option value="15">15</option>
       </select>
     </div> -->
-    <!-- TODO: Filtering Component -->
-    <!-- TODO: Filtering Component -->
-    <!-- TODO: Filtering Component -->
     <section>
       <div class="product-item-count">
         <h2 class="products-text">
-          {{ this.$route.params.products.toUpperCase() }}<span>/&nbsp;{{ this.categoryList?.length }} Item Exists</span>
+          {{ this.$route.params.products.toUpperCase() }}<span>/&nbsp;{{ this.filtered?.length }} Item Exists</span>
         </h2>
       </div>
       <div class="main">
         <div class="card_container">
-          <div class="card" v-for="category in categoryList" :key="category.id" value="category.id">
+          <div class="card" v-for="category in filtered" :key="category.id" value="category.id">
             <router-link :to="`/${this.$route.params.products}/${category.id}`" class="router-card" name="Detail">
               <img alt="Avatar" class="products_image" :src="category.image" />
               <div class="container">
@@ -54,6 +52,7 @@ export default {
 
   watch: {
     $route: "performApiCall",
+    selected: "performApiCall",
   },
 
   created() {
@@ -65,14 +64,20 @@ export default {
       let param = this.$route.params;
       this.$appAxios.get(`/products?category=${param.products}`).then((category_response) => {
         this.categoryList = category_response?.data || [];
-        console.log(JSON.parse(JSON.stringify(...this.categoryList)), "product-page");
+        // console.log(JSON.parse(JSON.stringify(...this.categoryList)));
+        // console.log(category_response?.data, "category-response");
+        console.log(this.categoryList, "CATEGORY");
       });
     },
   },
 
   computed: {
     filtered() {
-      return this.categoryList.filter((item) => item.skus === this.selected);
+      if (!this.selected) {
+        return this.categoryList;
+      } else {
+        return this.categoryList.filter((item) => item.skus.some((sku) => sku.size === this.selected));
+      }
     },
   },
 };
