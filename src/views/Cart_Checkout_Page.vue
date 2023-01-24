@@ -80,7 +80,8 @@ export default {
       if (!this.form.detail) {
         Swal.fire("Detail", "Detail must be exists...", "info");
         return;
-      } else Swal.fire("Cart Items", "Successfully Handle", "info");
+      } else Swal.fire("Cart Items", "Successfully Handle...", "info");
+      this.submitted = true;
     },
 
     removeAllCarts() {
@@ -147,7 +148,7 @@ export default {
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 50%;
+  width: 100%;
   opacity: 0.9;
 }
 
