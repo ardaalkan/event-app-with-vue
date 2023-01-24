@@ -27,6 +27,7 @@
           <p>Product Total</p>
           <p>Total:&nbsp;{{ totalPrice }} $</p>
         </div>
+        <router-link :to="{ path: '/Checkout' }"><button class="submitbtn">Checkout Page</button></router-link>
       </div>
     </div>
     <div class="empty-container-text" v-else>Cart Item is Empty</div>
@@ -96,6 +97,7 @@ export default {
     calculateTotal() {
       this.totalPrice = this.allPrice.reduce((a, b) => a + b, 0);
     },
+    
   },
   computed: {
     ...mapGetters(["_getCurrentUser", "_userCarts"]),
@@ -126,6 +128,21 @@ export default {
   border-width: 1px;
   padding: 15px;
   border-color: rgb(230, 230, 230);
+}
+
+.submitbtn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  opacity: 0.9;
+}
+
+.submitbtn:hover {
+  opacity: 1;
 }
 
 .order-summary h2 {

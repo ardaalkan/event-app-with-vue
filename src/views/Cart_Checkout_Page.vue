@@ -4,7 +4,7 @@
     <p class="checkout-description-text">ENTER YOUR ADRESS</p>
     <hr />
     <div>
-      <form>
+      <form v-if="!submitted">
         <label>City</label>
         <small class="form-valid-error" v-if="v$.form.city.$error">City doesnt exists.</small>
         <input type="text" placeholder="Enter City" name="city" id="city" v-model="v$.form.city.$model" />
@@ -14,10 +14,14 @@
         <input type="text" placeholder="Enter Country" name="country" id="country" v-model="v$.form.country.$model" />
         <br />
         <label>Detail Adress</label>
-        <small class="form-valid-error" v-if="v$.form.detail.$error">Detail doesnt exists.</small>
+        <small class="form-valid-error" v-if="v$.form.detail.$error">At least 20 characters must be written.</small>
         <input type="text" placeholder="Enter address details." name="detail" id="detail" v-model="v$.form.detail.$model" />
         <button class="submitbtn" @click="onRegisterTap">Submit</button>
       </form>
+      <div v-else>
+        <h1 class="shopping-description-text">THANKS FOR SHOPPİNG</h1>
+        <router-link :to="{ path: '/' }"><button class="backbtn" @click="removeAllCarts">Go To Home Page</button></router-link>
+      </div>
     </div>
   </div>
   <!-- TODO:
@@ -27,6 +31,7 @@ The page to be validated after receiving all the products on the Cart Page. -->
 <script>
 import useValidate from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
+import { mapGetters } from "vuex";
 
 export default {
   setup() {
@@ -72,8 +77,27 @@ export default {
       if (!this.form.detail) {
         alert("Required detail");
         return;
-      } else alert("submitted");
+      }
+      this.submitted = true;
     },
+    removeAllCarts() {
+      let carts = [...this._userCarts];
+      carts = [];
+      // this.$toast.info("Removed all items from the cart...");
+      this.$appAxios
+        .patch(`/users/${this._getCurrentUser.id}`, { carts })
+        .then((response) => {
+          console.log(response);
+          this.$store.commit("setCart", carts);
+          this.$router.go();
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    },
+  },
+  computed: {
+    ...mapGetters(["_getCurrentUser", "_userCarts"]),
   },
 };
 </script>
@@ -113,8 +137,28 @@ export default {
   opacity: 1;
 }
 
+.backbtn {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  opacity: 0.9;
+}
+
+.backbtn:hover {
+  opacity: 1;
+}
+
 .form-valid-error {
   font-size: 10px;
+  padding: 5px;
+}
+
+.shopping-description-text {
+  padding: 10px;
 }
 
 input {
