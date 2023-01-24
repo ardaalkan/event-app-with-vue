@@ -32,6 +32,7 @@ The page to be validated after receiving all the products on the Cart Page. -->
 import useValidate from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
 import { mapGetters } from "vuex";
+import Swal from "sweetalert2";
 
 export default {
   setup() {
@@ -67,19 +68,21 @@ export default {
   methods: {
     onRegisterTap: function () {
       if (!this.form.city) {
-        alert("Required city");
+        Swal.fire("City", "City must be exists...", "info");
+        // console.log("SWAL works - 1");
         return;
       }
       if (!this.form.country) {
-        alert("Required country");
+        Swal.fire("Country", "Country must be exists...", "info");
+        // console.log("SWAL works - 2");
         return;
       }
       if (!this.form.detail) {
-        alert("Required detail");
+        Swal.fire("Detail", "Detail must be exists...", "info");
         return;
-      }
-      this.submitted = true;
+      } else Swal.fire("Cart Items", "Successfully Handle", "info");
     },
+
     removeAllCarts() {
       let carts = [...this._userCarts];
       carts = [];
