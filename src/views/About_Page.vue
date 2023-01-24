@@ -2,7 +2,7 @@
   <NavbarView />
   <h1 class="about_text">Contact page</h1>
   <hr />
-  <form action="action" @submit.prevent="submitForm">
+  <form action="action" @submit.prevent="sendMail">
     <div class="container_register">
       <h1>Send Ticket</h1>
       <p>Please fill in this form to create an ticket.</p>
@@ -41,9 +41,9 @@
 </template>
 
 <script>
-// import { reactive } from "vue";
 import useValidate from "@vuelidate/core";
 import { required, minLength } from "@vuelidate/validators";
+import Swal from "sweetalert2";
 
 export default {
   setup() {
@@ -51,6 +51,10 @@ export default {
       v$: useValidate(),
     };
   },
+
+  // mounted() {
+  //   this.onRegisterTap();
+  // },
 
   data() {
     return {
@@ -75,21 +79,22 @@ export default {
       },
     };
   },
-
   methods: {
     onRegisterTap: function () {
       if (!this.form.name) {
-        alert("Required name");
+        Swal.fire("Name", "Name must be exists...", "info");
+        // console.log("SWAL works - 1");
         return;
       }
       if (!this.form.surname) {
-        alert("Required surname");
+        Swal.fire("Surname", "Surname must be exists...", "info");
+        // console.log("SWAL works - 2");
         return;
       }
-      if (!this.form.description || !this.form.description.minLength(41)) {
-        alert("Required description ");
+      if (!this.form.description) {
+        Swal.fire("Description", "Description must be exists...", "info");
         return;
-      } else alert("submitted");
+      } else Swal.fire("Success", "Ticket Sent Successfully", "info");
     },
   },
 };

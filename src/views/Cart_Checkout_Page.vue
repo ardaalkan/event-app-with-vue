@@ -4,7 +4,7 @@
     <p class="checkout-description-text">ENTER YOUR ADRESS</p>
     <hr />
     <div>
-      <form v-if="!submitted">
+      <form v-if="!submitted" ref="form" @submit.prevent="sendMail">
         <label>City</label>
         <small class="form-valid-error" v-if="v$.form.city.$error">City doesnt exists.</small>
         <input type="text" placeholder="Enter City" name="city" id="city" v-model="v$.form.city.$model" />
