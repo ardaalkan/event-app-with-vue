@@ -1,10 +1,10 @@
 <template>
   <body>
     <NavbarView />
-    <!-- <div class="products-filter-container">
+    <div class="products-filter-container">
       <span> Selected: {{ selected }}</span>
       <select v-model="selected">
-        <option value="">Please select one</option>
+        <option value="">All Sizes</option>
         <option value="7">7</option>
         <option value="8">8</option>
         <option value="9">9</option>
@@ -15,16 +15,16 @@
         <option value="14">14</option>
         <option value="15">15</option>
       </select>
-    </div> -->
+    </div>
     <section>
       <div class="product-item-count">
         <h2 class="products-text">
-          {{ this.$route.params.products.toUpperCase() }}<span>/&nbsp;{{ this.filtered?.length }} Item Exists</span>
+          {{ this.$route.params.products.toUpperCase() }}<span>/&nbsp;{{ this.filtered.length }} Item Exists</span>
         </h2>
       </div>
       <div class="main">
         <div class="card_container">
-          <div class="card" v-for="category in filtered" :key="category.id" value="category.id">
+          <div class="card" v-for="category in filtered" :key="category.id" :value="category.id">
             <router-link :to="`/${this.$route.params.products}/${category.id}`" class="router-card" name="Detail">
               <img alt="Avatar" class="products_image" :src="category.image" />
               <div class="container">
@@ -64,22 +64,50 @@ export default {
       let param = this.$route.params;
       this.$appAxios.get(`/products?category=${param.products}`).then((category_response) => {
         this.categoryList = category_response?.data || [];
+        // console.log(this.categoryList.map(item => item.name));
         // console.log(JSON.parse(JSON.stringify(...this.categoryList)));
         // console.log(category_response?.data, "category-response");
-        console.log(this.categoryList, "CATEGORY");
       });
     },
   },
 
   computed: {
+    filteredList() {
+      return JSON.parse(JSON.stringify(this.categoryList)).filter((item) => {
+        console.log(JSON.parse(JSON.stringify(this.categoryList)), "alo");
+        return item.skus.some((sku) => sku.size === parseInt(this.selected));
+      });
+    },
     filtered() {
       if (!this.selected) {
+        console.log(this.categoryList);
         return this.categoryList;
       } else {
-        return this.categoryList.filter((item) => item.skus.some((sku) => sku.size === this.selected));
+        // console.log(this.filteredList, "this.filteredList");
+        return this.filteredList;
       }
     },
   },
+
+  // computed: {
+  //   filtered() {
+  //     console.log('working computed');
+  //     if (!this.selected) {
+  //       console.log('working selected seçilmedi');
+  //       return this.categoryList;
+  //     } else {
+  //       console.log('working selected seçildi');
+  //       return new Proxy(this.categoryList, {
+  //         get: (target, prop) => {
+  //           if (prop === 'filtered') {
+  //             return target.filter(item => item.skus.some(sku => sku.size === this.selected));
+  //           }
+  //           return target[prop];
+  //         }
+  //       });
+  //     }
+  //   }
+  // }
 };
 </script>
 
@@ -91,6 +119,29 @@ body {
 .products-filter-container {
   display: flex;
   flex-direction: row;
+  background-color: rgb(241, 241, 241);
+  padding: 20px;
+  margin-top: 15px;
+  margin-left: 5%;
+}
+
+.products-filter-container select {
+  margin-right: 10px;
+  border: 1px solid #dfdfdf;
+  padding: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.products-filter-container span {
+  margin-right: 15px;
+  padding: 5px;
+  background-color: rgb(241, 241, 241);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: larger;
+  font-weight: 600;
 }
 
 .products-text {
