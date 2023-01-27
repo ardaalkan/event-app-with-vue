@@ -30,7 +30,7 @@
         <router-link :to="{ path: '/Checkout' }"><button class="submitbtn">Checkout Page</button></router-link>
       </div>
     </div>
-    <div class="empty-container-text" v-else>Cart Item is Empty</div>
+    <div class="empty-container-text" v-else>{{ this.$route.params.products.toUpperCase() }} Item is Empty</div>
   </div>
 </template>
 
@@ -97,7 +97,6 @@ export default {
     calculateTotal() {
       this.totalPrice = this.allPrice.reduce((a, b) => a + b, 0);
     },
-    
   },
   computed: {
     ...mapGetters(["_getCurrentUser", "_userCarts"]),

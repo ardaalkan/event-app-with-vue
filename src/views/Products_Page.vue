@@ -2,19 +2,24 @@
   <body>
     <NavbarView />
     <div class="products-filter-container">
-      <span> Selected: {{ selected }}</span>
-      <select v-model="selected">
-        <option value="">All Sizes</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        <option value="11">11</option>
-        <option value="12">12</option>
-        <option value="13">13</option>
-        <option value="14">14</option>
-        <option value="15">15</option>
-      </select>
+      <label>
+        <select v-model="selected">
+          <option value="">All Sizes</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+          <option value="11">11</option>
+          <option value="12">12</option>
+          <option value="13">13</option>
+          <option value="14">14</option>
+          <option value="15">15</option>
+        </select>
+      </label>
+      <div class="products-filter" v-if="selected">
+        <p>Selected :</p>
+        <span class="filtered-selected-size">{{ selected }}</span>
+      </div>
     </div>
     <section>
       <div class="product-item-count">
@@ -23,7 +28,7 @@
         </h2>
       </div>
       <div class="main">
-        <div class="card_container">
+        <div class="card_container" v-if="this.filtered.length">
           <div class="card" v-for="category in filtered" :key="category.id" :value="category.id">
             <router-link :to="`/${this.$route.params.products}/${category.id}`" class="router-card" name="Detail">
               <img alt="Avatar" class="products_image" :src="category.image" />
@@ -36,6 +41,7 @@
             </router-link>
           </div>
         </div>
+        <div class="empty-container-text" v-else>{{ this.$route.params.products }} Sizes Doesnt Exists.</div>
       </div>
     </section>
   </body>
@@ -116,6 +122,15 @@ body {
   height: 100%;
 }
 
+.empty-container-text {
+  padding-top: 30px;
+  font-size: 30px;
+}
+
+.empty-container-text::first-letter {
+  text-transform: capitalize;
+}
+
 .products-filter-container {
   display: flex;
   flex-direction: row;
@@ -123,25 +138,44 @@ body {
   padding: 20px;
   margin-top: 15px;
   margin-left: 5%;
+  align-items: end;
 }
 
 .products-filter-container select {
   margin-right: 10px;
   border: 1px solid #dfdfdf;
-  padding: 10px;
   padding-left: 25px;
   padding-right: 25px;
 }
 
-.products-filter-container span {
+.products-filter-container .products-filter {
   margin-right: 15px;
   padding: 5px;
   background-color: rgb(241, 241, 241);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   font-size: larger;
-  font-weight: 600;
+  font-weight: 400;
+}
+
+.products-filter p {
+  padding-right: 5px;
+  padding-top: 5px;
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.filtered-selected-size {
+  display: flex;
+  flex-direction: column;
+  background-color: transparent;
+  max-width: 40px;
+  max-height: 40px;
+  justify-content: end;
+  align-items: self-end;
+  font-size: 15px;
 }
 
 .products-text {
@@ -151,7 +185,7 @@ body {
 
 .products-text span {
   font-size: 15;
-  padding-left: 12px;
+  padding-left: 5px;
   color: #5f5f5f;
   font-weight: 400;
 }
@@ -214,134 +248,52 @@ body {
   color: rgb(49, 49, 49);
 }
 
-details {
-  position: relative;
-  width: 300px;
-  margin-right: 1rem;
-}
-
-details[open] {
-  z-index: 1;
-}
-
-summary {
-  padding: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: #ddd;
-  list-style: none;
-}
-
-summary::-webkit-details-marker {
-  display: none;
-}
-
-details[open] summary:before {
-  content: "";
-  display: block;
-  width: 100vw;
-  height: 100vh;
-  background: transparent;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-summary:after {
-  content: "";
-  display: inline-block;
-  float: right;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-bottom: 1px solid currentColor;
-  border-left: 1px solid currentColor;
-  border-bottom-left-radius: 2px;
-  transform: rotate(45deg) translate(50%, 0%);
-  transform-origin: center center;
-  transition: transform ease-in-out 100ms;
-}
-
-summary:focus {
-  outline: none;
-}
-
-details[open] summary:after {
-  transform: rotate(-45deg) translate(0%, 0%);
-}
-
-ul {
-  width: 100%;
-  background: #ddd;
-  position: absolute;
-  top: calc(100% + 0.5rem);
-  left: 0;
-  padding: 1rem;
-  margin: 0;
-  box-sizing: border-box;
-  border-radius: 5px;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-li {
-  margin: 0;
-  padding: 1rem 0;
-  border-bottom: 1px solid #ccc;
-}
-
-li:first-child {
-  padding-top: 0;
-}
-
-li:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-/* FAKE SELECT */
-
-summary.radios {
-  counter-reset: radios;
-}
-
-summary.radios:before {
-  content: var(--selection);
-}
-
-input[type="radio"] {
-  counter-increment: radios;
-  appearance: none;
-  display: none;
-}
-
-input[type="radio"]:checked {
-  display: inline;
-  --display: block;
-}
-
-input[type="radio"]:after {
-  content: attr(title);
-  display: inline;
-  font-size: 1rem;
-}
-
-ul.list {
-  counter-reset: labels;
-}
-
 label {
-  width: 100%;
-  display: flex;
-  cursor: pointer;
-  justify-content: space-between;
+  position: relative;
+  display: inline-block;
 }
 
-label span {
-  --display: none;
-  display: var(--display);
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid #727272;
+label:before {
+  content: "";
+  height: 31px;
+  position: absolute;
+  right: 7px;
+  top: 3px;
+  width: 22px;
+  background: #fff;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  pointer-events: none;
+  display: block;
+}
+label:after {
+  content: " ";
+  position: absolute;
+  right: 15px;
+  top: 46%;
+  margin-top: -3px;
+  z-index: 2;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6.9px 4px 0 4px;
+  border-color: #aaa transparent transparent transparent;
+  pointer-events: none;
+}
+label select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0 30px 0 10px;
+  border: 1px solid #e0e0e0;
   border-radius: 3px;
+  line-height: 36px;
+  height: 36px;
+  background: #fff;
+  margin: 0 5px 5px 0;
+}
+select::-ms-expand {
+  display: none;
 }
 </style>
