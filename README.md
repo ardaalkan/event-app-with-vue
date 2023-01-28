@@ -1,6 +1,6 @@
 # event-app-vue
 
-username: arda
+username: arda1
 
 password: 123
 
@@ -25,7 +25,8 @@ npm run serve
 | secure-ls          | Secure localStorage data with high level of encrypt.   |
 | vue                | Progressive JS framework for building UI's             |
 | vue-router         | Routing for SPA apps with vue                          |
-| vuetify            | Vue Material Component Framework                       |
 | vuex               | State management for Vue.js                            |
 | vuex-persistedstate| Library to migrate vuex state using vuex-persistedstate|
 | concurrently       | Run multiple commands concurrently.                    |
+| vue-sweetaler2     | Alert package for using with Vue.js                    |
+| meforma/vue-toaster| Vue.js toaster notification.                           |
