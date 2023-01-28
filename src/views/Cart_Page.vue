@@ -30,7 +30,7 @@
         <router-link :to="{ path: '/Checkout' }"><button class="submitbtn">Checkout Page</button></router-link>
       </div>
     </div>
-    <div class="empty-container-text" v-else>{{ this.$route.params.products.toUpperCase() }} Item is Empty</div>
+    <div class="empty-container-text" v-else>{{ this.$route.params.products }} Item is Empty</div>
   </div>
 </template>
 

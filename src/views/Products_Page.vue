@@ -16,9 +16,20 @@
           <option value="15">15</option>
         </select>
       </label>
+      <label>
+        <select v-model="pricesSelected">
+          <option value="">All Prices</option>
+          <option value="Low to High">Price low to high</option>
+          <option value="High to Low">Price high to low</option>
+        </select>
+      </label>
       <div class="products-filter" v-if="selected">
         <p>Selected :</p>
         <span class="filtered-selected-size">{{ selected }}</span>
+      </div>
+      <div class="products-filter" v-if="pricesSelected">
+        <p>Prices Selected :</p>
+        <span class="filtered-selected-size">{{ pricesSelected }}</span>
       </div>
     </div>
     <section>
@@ -53,12 +64,14 @@ export default {
     return {
       categoryList: [],
       selected: "",
+      pricesSelected: "",
     };
   },
 
   watch: {
     $route: "performApiCall",
     selected: "performApiCall",
+    pricesSelected: "performApiCall",
   },
 
   created() {
@@ -80,40 +93,46 @@ export default {
   computed: {
     filteredList() {
       return JSON.parse(JSON.stringify(this.categoryList)).filter((item) => {
-        console.log(JSON.parse(JSON.stringify(this.categoryList)), "alo");
+        // console.log(JSON.parse(JSON.stringify(this.categoryList)), "catch");
         return item.skus.some((sku) => sku.size === parseInt(this.selected));
       });
     },
+    pricesList() {
+      const list = JSON.parse(JSON.stringify(this.categoryList));
+      // console.log(...list, "New List");
+      // console.log(JSON.parse(JSON.stringify(this.categoryList)), "catch");
+      if (this.pricesSelected === "High to Low") {
+        return [...list.sort((a, b) => b.price - a.price)];
+      }
+      if (this.pricesSelected === "Low to High") {
+        return [...list.sort((a, b) => a.price - b.price)];
+      } else return list;
+    },
     filtered() {
-      if (!this.selected) {
-        console.log(this.categoryList);
+      if (!this.selected && !this.pricesSelected) {
+        // console.log(this.categoryList, "Filtered Categorylist - !this.selected");
         return this.categoryList;
-      } else {
-        // console.log(this.filteredList, "this.filteredList");
+      } else if (this.selected && this.pricesSelected) {
+        let filteredList = JSON.parse(JSON.stringify(this.categoryList)).filter((item) => {
+          return item.skus.some((sku) => sku.size === parseInt(this.selected));
+        });
+        if (this.pricesSelected === "High to Low") {
+          filteredList = filteredList.sort((a, b) => b.price - a.price);
+        } else if (this.pricesSelected === "Low to High") {
+          filteredList = filteredList.sort((a, b) => a.price - b.price);
+        }
+        return filteredList;
+      } else if (this.selected) {
         return this.filteredList;
+      } else if (this.pricesSelected) {
+        // console.log(this.pricesList, "Filtered Prices Selected!");
+        return this.pricesList;
+      } else {
+        // console.log(this.categoryList, "Filtered Categorylist Else Cond");
+        return this.categoryList;
       }
     },
   },
-
-  // computed: {
-  //   filtered() {
-  //     console.log('working computed');
-  //     if (!this.selected) {
-  //       console.log('working selected seçilmedi');
-  //       return this.categoryList;
-  //     } else {
-  //       console.log('working selected seçildi');
-  //       return new Proxy(this.categoryList, {
-  //         get: (target, prop) => {
-  //           if (prop === 'filtered') {
-  //             return target.filter(item => item.skus.some(sku => sku.size === this.selected));
-  //           }
-  //           return target[prop];
-  //         }
-  //       });
-  //     }
-  //   }
-  // }
 };
 </script>
 
@@ -164,14 +183,14 @@ body {
   padding-top: 5px;
   font-size: 15px;
   display: flex;
-  align-items: center;
+  align-items: end;
 }
 
 .filtered-selected-size {
   display: flex;
   flex-direction: column;
   background-color: transparent;
-  max-width: 40px;
+  max-width: 1200px;
   max-height: 40px;
   justify-content: end;
   align-items: self-end;
