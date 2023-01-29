@@ -10,7 +10,11 @@
               <h1>{{ favorite.category }}</h1>
               <p class="price">{{ favorite.price }}$</p>
               <p class="favorite-container-desc">{{ favorite.description }}</p>
-              <p><button @click="removeFavorites(favorite)">Remove</button></p>
+              <p>
+                <button class="favorite-container-btn" @click="removeFavorites(favorite)">
+                  <img v-bind:src="svgContent" width="30" height="30" /><span class="favorite-remove-text">Remove</span>
+                </button>
+              </p>
             </div>
           </div>
         </div>
@@ -21,13 +25,16 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";  
+import { mapGetters } from "vuex";
 
 export default {
   data() {
     return {
       detailList: "",
       favoriteList: [],
+      svgContent: require("@/assets/images-svg/full-heart.svg"),
+      svg1: require("@/assets/images-svg/full-heart.svg"),
+      svg2: require("@/assets/images-svg/empty-heart.svg"),
     };
   },
 
@@ -45,7 +52,6 @@ export default {
           this.$appAxios.get(`/products?id=${arr}`).then((arr_response) => {
             arr_response.data.push(...this.favoriteList);
             this.favoriteList = arr_response?.data || [];
-
             // console.log(arr_response.data, "data");
             // console.log(arr_response, "arr_response_Here");
             // console.log(this.favoriteList.length, "favorite-list-length");
@@ -54,8 +60,9 @@ export default {
       });
     },
     removeFavorites(favorite) {
+      this.svgContent = this.svgContent === this.svg1 ? this.svg2 : this.svg1;
       let favorites = [...this._userFavorites];
-      console.log(favorite.id, 'favorite-id')
+      console.log(favorite.id, "favorite-id");
       if (this._userFavorites.indexOf(favorite.id) > -1) {
         favorites = favorites.filter((l) => l !== favorite.id);
         this.$toast.info(`Removed from favorites page...`);
@@ -69,7 +76,7 @@ export default {
           });
       }
       this.$store.commit("setFavorite", favorites);
-      this.$router.go()
+      this.$router.go();
     },
   },
   computed: {
@@ -108,6 +115,18 @@ export default {
 
 .favorite-container-desc {
   padding: 10px;
+}
+
+.favorite-container-btn {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-content: center;
+}
+
+.favorite-remove-text {
+  align-self: center;
+  padding-left: 10px;
 }
 
 .empty-container-text {

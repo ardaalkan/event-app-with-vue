@@ -2,7 +2,7 @@
   <body>
     <NavbarView />
     <div class="products-filter-container">
-      <label>
+      <label class="selected">
         <select v-model="selected">
           <option value="">All Sizes</option>
           <option value="7">7</option>
@@ -16,7 +16,7 @@
           <option value="15">15</option>
         </select>
       </label>
-      <label>
+      <label class="selected">
         <select v-model="pricesSelected">
           <option value="">All Prices</option>
           <option value="Low to High">Price low to high</option>
@@ -167,6 +167,10 @@ body {
   padding-right: 25px;
 }
 
+.products-filter-container label {
+  max-width: 190px;
+}
+
 .products-filter-container .products-filter {
   margin-right: 15px;
   padding: 5px;
@@ -267,12 +271,12 @@ body {
   color: rgb(49, 49, 49);
 }
 
-label {
+.selected {
   position: relative;
   display: inline-block;
 }
 
-label:before {
+.selected:before {
   content: "";
   height: 31px;
   position: absolute;
@@ -285,7 +289,7 @@ label:before {
   pointer-events: none;
   display: block;
 }
-label:after {
+.selected:after {
   content: " ";
   position: absolute;
   right: 15px;
@@ -300,7 +304,7 @@ label:after {
   border-color: #aaa transparent transparent transparent;
   pointer-events: none;
 }
-label select {
+.selected select {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;

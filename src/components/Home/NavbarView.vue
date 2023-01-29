@@ -1,39 +1,37 @@
 <template>
-  <body>
-    <div class="topnav">
-      <img class="navbar-image" src="../../assets/png_logo.png" />
-      <div class="router-link">
-        <router-link to="/">Home</router-link>
-      </div>
-      <div class="router-link">
-        <router-link to="/shoes">Shoes</router-link>
-      </div>
-      <div class="router-link">
-        <router-link to="/backpacks">Backpacks</router-link>
-      </div>
-      <div class="router-link" v-if="_isAuthenticated">
-        <router-link to="/cart">Cart</router-link>
-      </div>
-      <div class="router-link">
-        <router-link to="/favorite" v-if="_isAuthenticated">Favorites</router-link>
-      </div>
-      <div class="router-link">
-        <router-link to="/about">About</router-link>
-      </div>
-
-      <div class="router-link" v-if="_isAuthenticated">
-        <a @click="onLogout">Logout</a>
-      </div>
-      <div class="router-link" v-else>
-        <router-link to="/">Login</router-link>
-      </div>
+  <div class="topnav">
+    <img class="navbar-image" src="../../assets/png_logo.png" />
+    <div class="router-link">
+      <router-link to="/">Home</router-link>
+    </div>
+    <div class="router-link">
+      <router-link to="/shoes">Shoes</router-link>
+    </div>
+    <div class="router-link">
+      <router-link to="/backpacks">Backpacks</router-link>
+    </div>
+    <div class="router-link" v-if="_isAuthenticated">
+      <router-link to="/cart">Cart</router-link>
+    </div>
+    <div class="router-link">
+      <router-link to="/favorite" v-if="_isAuthenticated">Favorites</router-link>
+    </div>
+    <div class="router-link">
+      <router-link to="/about">About</router-link>
     </div>
 
-    <!-- <div style="padding-left: 16px">
+    <div class="router-link" v-if="_isAuthenticated">
+      <a @click="onLogout">Logout</a>
+    </div>
+    <div class="router-link" v-else>
+      <router-link to="/">Login</router-link>
+    </div>
+  </div>
+
+  <!-- <div style="padding-left: 16px">
       <h2>Top Navigation Example</h2>
       <p>Some content..</p>
     </div> -->
-  </body>
 </template>
 
 <script>

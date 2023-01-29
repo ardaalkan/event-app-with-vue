@@ -23,7 +23,8 @@
               'cart-item-active': alreadyInCart,
             }"
           >
-            <span>Add basket</span>
+            <img v-bind:src="svgContent1" width="30" height="30" />
+            <span class="product-detail-button-text">Add basket</span>
           </button>
           <button
             class="product-detail-button"
@@ -32,7 +33,8 @@
               'favorite-item-active': alreadyInFav,
             }"
           >
-            <span>Favorite</span>
+            <img v-bind:src="svgContent" width="30" height="30" />
+            <span class="product-detail-button-text">Favorite</span>
           </button>
         </div>
       </div>
@@ -50,6 +52,12 @@ export default {
   data() {
     return {
       detailList: null,
+      svgContent: require("@/assets/images-svg/tick-heart.svg"),
+      svg1: require("@/assets/images-svg/tick-heart.svg"),
+      svg2: require("@/assets/images-svg/close-heart.svg"),
+      svgContent1: require("@/assets/images-svg/tick-cart.svg"),
+      svg3: require("@/assets/images-svg/tick-cart.svg"),
+      svg4: require("@/assets/images-svg/close-cart.svg"),
     };
   },
 
@@ -71,6 +79,7 @@ export default {
       });
     },
     saveFavorites() {
+      this.svgContent = this.svgContent === this.svg1 ? this.svg2 : this.svg1;
       const arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].id)));
       let favorites = [...this._userFavorites];
 
@@ -90,6 +99,7 @@ export default {
     },
 
     saveCarts() {
+      this.svgContent1 = this.svgContent1 === this.svg3 ? this.svg4 : this.svg3;
       const arr = (this.arrayDetaillist = JSON.parse(JSON.stringify(this.detailList[0].id)));
       let carts = [...this._userCarts];
 
@@ -265,8 +275,8 @@ hr {
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-.detail-page-event-container {
-}
+/* .detail-page-event-container {
+} */
 
 @media screen and (max-width: 950px) {
   .detail-page-event-container {
@@ -302,17 +312,21 @@ hr {
 }
 
 .product-detail-event-buttons {
+  display: flex;
+  flex-direction: row;
 }
 
 .product-detail-button {
   margin-right: 10px;
-  justify-content: center;
-  height: 45px;
+  height: 55px;
   background-color: #364147;
   margin-top: 10px;
   padding-top: 5px;
   width: 135px;
   border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .favorite-item-active {
@@ -338,7 +352,7 @@ hr {
   width: 12rem;
 } */
 
-.product-detail-button span {
+.product-detail-button-text {
   width: 75px;
   color: rgb(255, 255, 255);
 }
