@@ -28,5 +28,5 @@ npm run serve
 | vuex               | State management for Vue.js                            |
 | vuex-persistedstate| Library to migrate vuex state using vuex-persistedstate|
 | concurrently       | Run multiple commands concurrently.                    |
-| vue-sweetaler2     | Alert package for using with Vue.js                    |
+| vue-sweetalert2     | Alert package for using with Vue.js                    |
 | meforma/vue-toaster| Vue.js toaster notification.                           |

@@ -119,7 +119,7 @@ export default {
   margin: 15px;
   margin-top: 35px;
   background-color: rgb(245, 245, 245);
-  max-height: 200px;
+  max-height: 220px;
   min-width: 350px;
   position: sticky;
   top: 10px;
@@ -162,16 +162,41 @@ export default {
 .cart_text {
   display: flex;
   justify-content: center;
+  font-size: 30px;
+  padding: 5px;
 }
 
 .body-container {
   width: 100%;
   position: relative;
 }
+
+@media screen and (max-width: 1268px) {
+  .price-container {
+    width: 90%;
+    margin: auto;
+  }
+}
+
+@media screen and (max-width: 868px) {
+  .price-container {
+    width: 99%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 468px) {
+  .price-container {
+    width: 99%;
+  }
+}
+
 .body-container .products {
   width: 60%;
   margin: auto;
 }
+
 .body-container .products .product {
   background-color: #009b77;
   color: white;

@@ -3,6 +3,10 @@
     <NavbarView />
     <section class="favorite-section">
       <div class="favorite-container-item">
+        <h1 class="favorite-text">Favorite Page</h1>
+        <div class="favorite-counter">
+          <p>{{ favoriteList.length }} <span>item in your favorite list</span></p>
+        </div>
         <div class="favorite-item-iterate" v-if="favoriteList.length">
           <div class="card" v-for="favorite in favoriteList" :key="favorite.id" value="favorite.id">
             <img class="favorite-image" :src="favorite.image" alt="favorite-product" />
@@ -98,6 +102,21 @@ export default {
   justify-content: center;
   margin: auto;
   text-transform: capitalize;
+}
+
+.favorite-text {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  padding: 5px;
+}
+
+.favorite-counter {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background-color: rgb(245, 245, 245);
+  padding: 10px;
 }
 
 .favorite-item-iterate {
