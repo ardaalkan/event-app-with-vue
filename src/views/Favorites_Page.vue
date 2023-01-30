@@ -7,6 +7,22 @@
         <div class="favorite-counter">
           <p>{{ favoriteList.length }} <span>item in your favorite list</span></p>
         </div>
+        <div class="favorite-filter-container">
+          <label class="selected">
+            <select>
+              <option value="">All Prices</option>
+              <option value="Low to High">Price low to high</option>
+              <option value="High to Low">Price high to low</option>
+            </select>
+          </label>
+          <label class="selected">
+            <select>
+              <option value="">All Products</option>
+              <option value="Low to High">Shoes</option>
+              <option value="High to Low">Backpacks</option>
+            </select>
+          </label>
+        </div>
         <div class="favorite-item-iterate" v-if="favoriteList.length">
           <div class="card" v-for="favorite in favoriteList" :key="favorite.id" value="favorite.id">
             <img class="favorite-image" :src="favorite.image" alt="favorite-product" />
@@ -102,6 +118,28 @@ export default {
   justify-content: center;
   margin: auto;
   text-transform: capitalize;
+}
+
+.favorite-filter-container {
+  display: flex;
+  flex-direction: row;
+  background-color: transparent;
+  padding: 5px;
+  margin-top: 15px;
+  justify-content: center;
+}
+
+/* .favorite-filter-container select {
+  margin-right: 10px;
+  padding: 10px;
+  border: 2px solid #c5c5c5;
+  padding-left: 25px;
+  padding-right: 25px;
+} */
+
+.favorite-filter-container label {
+  max-width: 190px;
+  margin-right: 10px;
 }
 
 .favorite-text {
@@ -200,134 +238,52 @@ body {
   height: 100%;
 }
 
-details {
+.selected {
   position: relative;
-  width: 300px;
-  margin-right: 1rem;
-}
-
-details[open] {
-  z-index: 1;
-}
-
-summary {
-  padding: 1rem;
-  cursor: pointer;
-  border-radius: 5px;
-  background-color: #ddd;
-  list-style: none;
-}
-
-summary::-webkit-details-marker {
-  display: none;
-}
-
-details[open] summary:before {
-  content: "";
-  display: block;
-  width: 100vw;
-  height: 100vh;
-  background: transparent;
-  position: fixed;
-  top: 0;
-  left: 0;
-}
-
-summary:after {
-  content: "";
   display: inline-block;
-  float: right;
-  width: 0.5rem;
-  height: 0.5rem;
-  border-bottom: 1px solid currentColor;
-  border-left: 1px solid currentColor;
-  border-bottom-left-radius: 2px;
-  transform: rotate(45deg) translate(50%, 0%);
-  transform-origin: center center;
-  transition: transform ease-in-out 100ms;
 }
 
-summary:focus {
-  outline: none;
-}
-
-details[open] summary:after {
-  transform: rotate(-45deg) translate(0%, 0%);
-}
-
-ul {
-  width: 100%;
-  background: #ddd;
+.selected:before {
+  content: "";
+  height: 31px;
   position: absolute;
-  top: calc(100% + 0.5rem);
-  left: 0;
-  padding: 1rem;
-  margin: 0;
-  box-sizing: border-box;
-  border-radius: 5px;
-  max-height: 200px;
-  overflow-y: auto;
+  right: 7px;
+  top: 3px;
+  width: 22px;
+  background: #fff;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  pointer-events: none;
+  display: block;
 }
-
-li {
-  margin: 0;
-  padding: 1rem 0;
-  border-bottom: 1px solid #ccc;
+.selected:after {
+  content: " ";
+  position: absolute;
+  right: 15px;
+  top: 46%;
+  margin-top: -3px;
+  z-index: 2;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6.9px 4px 0 4px;
+  border-color: #aaa transparent transparent transparent;
+  pointer-events: none;
 }
-
-li:first-child {
-  padding-top: 0;
-}
-
-li:last-child {
-  padding-bottom: 0;
-  border-bottom: none;
-}
-
-/* FAKE SELECT */
-
-summary.radios {
-  counter-reset: radios;
-}
-
-summary.radios:before {
-  content: var(--selection);
-}
-
-input[type="radio"] {
-  counter-increment: radios;
+.selected select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   appearance: none;
-  display: none;
-}
-
-input[type="radio"]:checked {
-  display: inline;
-  --display: block;
-}
-
-input[type="radio"]:after {
-  content: attr(title);
-  display: inline;
-  font-size: 1rem;
-}
-
-ul.list {
-  counter-reset: labels;
-}
-
-label {
-  width: 100%;
-  display: flex;
-  cursor: pointer;
-  justify-content: space-between;
-}
-
-label span {
-  --display: none;
-  display: var(--display);
-  width: 1rem;
-  height: 1rem;
-  border: 1px solid #727272;
+  padding: 0 30px 0 10px;
+  border: 1px solid #e0e0e0;
   border-radius: 3px;
+  line-height: 36px;
+  height: 36px;
+  background: #fff;
+  margin: 0 5px 5px 0;
+}
+select::-ms-expand {
+  display: none;
 }
 </style>
