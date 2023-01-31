@@ -78,7 +78,7 @@
           "size": 9
         }
       ],
-      "description": "Should always come with you... Gonna be your best friend forever."
+      "description": "Should always come with you... Gonna be your best friend."
     },
     {
       "id": 5,
@@ -446,8 +446,16 @@
       "fullname": "arda1",
       "password": "6ab4adb5c2dc445d331c3af0a28ccd31730c5f95",
       "id": 2,
-      "favorites": [],
-      "carts": []
+      "favorites": [
+        3,
+        4,
+        5,
+        2,
+        1
+      ],
+      "carts": [
+        2
+      ]
     },
     {
       "username": "arda5",

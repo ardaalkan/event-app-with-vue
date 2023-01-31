@@ -4,27 +4,36 @@
     <section class="favorite-section">
       <div class="favorite-container-item">
         <h1 class="favorite-text">Favorite Page</h1>
-        <div class="favorite-counter">
+        <!-- <div class="favorite-counter">
           <p>{{ favoriteList.length }} <span>item in your favorite list</span></p>
+        </div> -->
+        <div v-if="favoriteList.length">
+          <div class="favorite-filter-container">
+            <label class="selected">
+              <select v-model="pricesSelect">
+                <option value="">All Sizes</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+                <option value="13">13</option>
+                <option value="14">14</option>
+                <option value="15">15</option>
+              </select>
+            </label>
+            <!-- <label class="selected">
+              <select v-model="productSelect">
+                <option value="">All Products</option>
+                <option value="Low to High">Shoes</option>
+                <option value="High to Low">Backpacks</option>
+              </select>
+            </label> -->
+          </div>
         </div>
-        <div class="favorite-filter-container">
-          <label class="selected">
-            <select>
-              <option value="">All Prices</option>
-              <option value="Low to High">Price low to high</option>
-              <option value="High to Low">Price high to low</option>
-            </select>
-          </label>
-          <label class="selected">
-            <select>
-              <option value="">All Products</option>
-              <option value="Low to High">Shoes</option>
-              <option value="High to Low">Backpacks</option>
-            </select>
-          </label>
-        </div>
-        <div class="favorite-item-iterate" v-if="favoriteList.length">
-          <div class="card" v-for="favorite in favoriteList" :key="favorite.id" value="favorite.id">
+        <div class="favorite-item-iterate" v-if="filtered.length">
+          <div class="card" v-for="favorite in filtered" :key="favorite.id" value="favorite.id">
             <img class="favorite-image" :src="favorite.image" alt="favorite-product" />
             <div class="favorite-container-descriptions">
               <h1>{{ favorite.category }}</h1>
@@ -38,7 +47,7 @@
             </div>
           </div>
         </div>
-        <div v-else class="empty-container-text">Favorite Item is Empty</div>
+        <div v-else class="empty-container-text">Favorite item does not exists.</div>
       </div>
     </section>
   </body>
@@ -52,6 +61,8 @@ export default {
     return {
       detailList: "",
       favoriteList: [],
+      pricesSelect: "",
+      productSelect: "",
       svgContent: require("@/assets/images-svg/full-heart.svg"),
       svg1: require("@/assets/images-svg/full-heart.svg"),
       svg2: require("@/assets/images-svg/empty-heart.svg"),
@@ -104,6 +115,33 @@ export default {
 
     alreadyInFav() {
       return this._userFavorites?.indexOf(JSON.parse(JSON.stringify(this.detailList[0].id))) > -1;
+    },
+
+    filteredList() {
+      return JSON.parse(JSON.stringify(this.favoriteList)).filter((item) => {
+        // console.log(JSON.parse(JSON.stringify(this.favoriteList)), "catch");
+        return item.skus.some((sku) => sku.size === parseInt(this.pricesSelect));
+      });
+    },
+
+    // pricesList() {
+    //   const list = JSON.parse(JSON.stringify(this.favoriteList));
+    //   // console.log(...list, "New List");
+    //   // console.log(JSON.parse(JSON.stringify(this.categoryList)), "catch");
+    //   if (this.pricesSelected === "High to Low") {
+    //     return [...list.sort((a, b) => b.price - a.price)];
+    //   }
+    //   if (this.pricesSelected === "Low to High") {
+    //     return [...list.sort((a, b) => a.price - b.price)];
+    //   } else return list;
+    // },
+
+    filtered() {
+      if (!this.pricesSelect && !this.productSelect) {
+        return this.favoriteList;
+      } else {
+        return this.filteredList;
+      }
     },
   },
 };
