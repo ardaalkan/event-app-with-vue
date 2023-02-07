@@ -13,6 +13,8 @@ import * as directives from "vuetify/directives";
 import Toaster from "@meforma/vue-toaster";
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+// import VModal from 'vue-js-modal'
+// import VModal from 'vue-js-modal'
 
 const app = createApp(App);
 const vuetify = createVuetify({
@@ -26,6 +28,7 @@ app.use(store);
 app.use(vuetify);
 app.use(Toaster);
 app.use(VueSweetalert2);
+// app.use(VModal);
 app.mount("#app");
 // createApp(App).use(vuetify).mount('#app')
 app.config.globalProperties.$appAxios = appAxios;

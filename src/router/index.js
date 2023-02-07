@@ -47,6 +47,11 @@ const routes = [
     path: "/about",
     component: () => import("@/views/About_Page.vue"),
   },
+  // {
+  //   name: "checkoutt",
+  //   path: "/checkoutt",
+  //   component: () => import("@/views/Cart_Checkout.vue"),
+  // },
 ];
 
 const router = createRouter({

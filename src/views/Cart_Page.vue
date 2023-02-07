@@ -15,9 +15,9 @@
           </div>
           <p class="cart-item-category-description">{{ cartItem.description }}</p>
           <p class="cart-item-category-price">Price: {{ cartItem.price }}&nbsp;$</p>
-          <!-- <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">+</button>
-          <span class="basket-counter" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">1</span>
-          <button class="basket-add" data-basket-product-price="100" data-basket-product-id="prod1" data-basket-product-name="Apples">-</button> -->
+          <!-- <button class="basket-add" @click="increaseCartQuantity(cartItem)">+</button>
+          <span class="basket-counter">{{ cartItem.quantity }}</span>
+          <button class="basket-add" @click="decreaseCartQuantity(cartItem)">-</button> -->
         </div>
       </div>
       <div class="order-summary">
@@ -73,7 +73,6 @@ export default {
         });
       });
     },
-
     removeCarts(cartItem) {
       let carts = [...this._userCarts];
       if (this._userCarts.indexOf(cartItem.id) > -1) {
@@ -88,14 +87,62 @@ export default {
             console.log(error);
           });
       }
-      console.log(cartItem.id, "cartItem-id");
-
+      // console.log(cartItem.id, "cartItem-id");
       this.$store.commit("setCart", carts);
       this.$router.go();
     },
 
+    // increaseCartQuantity(cartItem) {
+    //   let carts = [...this._userCarts];
+    //   let cartIndex = this._userCarts.indexOf(cartItem.id);
+    //   console.log(cartIndex, "cartIndex");
+    //   if (cartIndex > -1) {
+    //     carts[cartIndex].quantity += 1;
+    //     this.$toast.info(`Increased quantity in cart...`);
+    //     this.$appAxios
+    //       .patch(`/users/${this._getCurrentUser.id}`, { carts })
+    //       .then((response) => {
+    //         console.log(response);
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //   }
+    //   this.$store.commit("setCart", carts);
+    //   this.$router.go();
+    // },
+
+    // decreaseCartQuantity(cartItem) {
+    //   let carts = [...this._userCarts];
+    //   let cartIndex = this._userCarts.indexOf(cartItem.id);
+    //   if (cartIndex > -1) {
+    //     carts[cartIndex].quantity -= 1;
+    //     this.$toast.info(`Increased quantity in cart...`);
+    //     this.$appAxios
+    //       .patch(`/users/${this._getCurrentUser.id}`, { carts })
+    //       .then((response) => {
+    //         console.log(response);
+    //       })
+    //       .catch((error) => {
+    //         console.log(error);
+    //       });
+    //   }
+    //   this.$store.commit("setCart", carts);
+    //   this.$router.go();
+    // },
+
     calculateTotal() {
       this.totalPrice = this.allPrice.reduce((a, b) => a + b, 0);
+    },
+    increaseQuantity(price) {
+      this.quantity += 1;
+      this.totalPrice += price;
+    },
+    decreaseQuantity(price) {
+      if (this.quantity > 0) {
+        this.quantity -= 1;
+        this.totalPrice -= price;
+      }
     },
   },
   computed: {

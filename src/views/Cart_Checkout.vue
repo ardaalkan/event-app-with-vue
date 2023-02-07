@@ -1,47 +1,56 @@
 <template>
-  <div>
+  <div class="checkout-container">
     <h1 class="cart_text">Cart Checkout Page</h1>
-    <!-- <button class="add-new-adress-btn">ADD NEW ADRESS İF DOESNT EXİSTS ANY CHECKOUT ADDRESS</button> -->
-    <div class="checkout-container">
-      <p class="checkout-description-text">ENTER YOUR ADRESS</p>
-      <hr />
-      <div>
-        <form v-if="!submitted" ref="form" @submit.prevent="sendMail">
-          <label>City</label>
-          <small class="form-valid-error" v-if="v$.form.city.$error">City doesnt exists.</small>
-          <input type="text" placeholder="Enter City" name="city" id="city" v-model="v$.form.city.$model" />
-          <br />
-          <label>Country</label>
-          <small class="form-valid-error" v-if="v$.form.country.$error">Country doesnt exists.</small>
-          <input type="text" placeholder="Enter Country" name="country" id="country" v-model="v$.form.country.$model" />
-          <br />
-          <label>Detail Adress</label>
-          <small class="form-valid-error" v-if="v$.form.detail.$error">At least 20 characters must be written.</small>
-          <input type="text" placeholder="Enter address details." name="detail" id="detail" v-model="v$.form.detail.$model" />
-          <button class="submitbtn" @click="onRegisterTap">Add Address</button>
+    <div class="empty-modal-container">
+      <button class="modal-button" @click="isModalVisible = true">Add Delivery Address</button>
+    </div>
+    <div v-if="isModalVisible" class="modal-overlay">
+      <div class="modal-content">
+        <button class="modal-button" @click="isModalVisible = false">Close</button>
+        <form>
+          <!-- Form fields go here -->
+          <div class="checkout-container">
+            <p class="checkout-description-text">ENTER YOUR ADRESS</p>
+            <hr />
+            <div>
+              <form v-if="!submitted" ref="form" @submit.prevent="sendMail">
+                <label>City</label>
+                <small class="form-valid-error" v-if="v$.form.city.$error">City doesnt exists.</small>
+                <input type="text" placeholder="Enter City" name="city" id="city" v-model="v$.form.city.$model" />
+                <br />
+                <label>Country</label>
+                <small class="form-valid-error" v-if="v$.form.country.$error">Country doesnt exists.</small>
+                <input type="text" placeholder="Enter Country" name="country" id="country" v-model="v$.form.country.$model" />
+                <br />
+                <label>Detail Adress</label>
+                <small class="form-valid-error" v-if="v$.form.detail.$error">At least 20 characters must be written.</small>
+                <input type="text" placeholder="Enter address details." name="detail" id="detail" v-model="v$.form.detail.$model" />
+                <button class="submitbtn" @click="onRegisterTap">Add Address</button>
+              </form>
+              <!-- <br />
+              <hr /> -->
+            </div>
+          </div>
         </form>
         <br />
-        <hr />
-        <!-- <div>
-          <div class="adress-container-title">Delivery Address</div>
-          <div class="checkout-adress-container">
-            <div class="adress-title">
-              <h3>Address</h3>
-              <CloseSvg />
-            </div>
-            <p>City: Antalya</p>
-            <hr />
-            <p>Country: Türkiye</p>
-            <hr />
-            <p>Detail Address: Muratpaşa / Antalya - Okyanus Mahallesi 124.Sokak</p>
-          </div>
-          <button class="submit-btn">SUBMİT</button>
-        </div> -->
       </div>
     </div>
+    <div>
+      <div class="adress-container-title">Delivery Address</div>
+      <div class="checkout-adress-container">
+        <div class="adress-title">
+          <h3>Address</h3>
+          <CloseSvg />
+        </div>
+        <p>City: Antalya</p>
+        <hr />
+        <p>Country: Türkiye</p>
+        <hr />
+        <p>Detail Address: Muratpaşa / Antalya - Okyanus Mahallesi 124.Sokak</p>
+      </div>
+      <button class="submit-btn">Save and Continue</button>
+    </div>
   </div>
-  <!-- TODO:
-The page to be validated after receiving all the products on the Cart Page. -->
 </template>
 
 <script>
@@ -58,9 +67,7 @@ export default {
     };
   },
 
-  components: {
-    // CloseSvg,
-  },
+  components: {},
 
   data() {
     return {
@@ -70,6 +77,7 @@ export default {
         detail: null,
       },
       submitted: false,
+      isModalVisible: false,
     };
   },
 
@@ -128,6 +136,48 @@ export default {
 </script>
 
 <style>
+/* Toggle Modal Container */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+  min-width: 600px;
+}
+
+.modal-button {
+  background-color: rgb(40, 40, 40);
+  color: white;
+  padding: 8px;
+  margin: 10px;
+  width: 200px;
+}
+
+/* Toggle Modal Container */
+
+.checkout-container {
+  display: flex;
+  justify-content: column;
+}
+
+.empty-modal-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
 .add-new-adress-btn {
   background-color: black;
   color: #e9e9e9;
@@ -225,9 +275,9 @@ export default {
 }
 
 .submit-btn {
-  background-color: #e9e9e9;
+  background-color: rgb(40, 40, 40);
   padding: 10px;
-  color: rgb(43, 43, 43);
+  color: rgb(230, 230, 230);
   margin-top: 3px;
   font-weight: 500;
 }
@@ -276,5 +326,9 @@ hr {
 
 label {
   padding: 5px;
+}
+
+form {
+  margin: 5px;
 }
 </style>

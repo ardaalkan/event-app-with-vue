@@ -34,7 +34,7 @@
         </div>
         <div class="favorite-item-iterate" v-if="filtered.length">
           <div class="card" v-for="favorite in filtered" :key="favorite.id" value="favorite.id">
-            <img class="favorite-image" :src="favorite.image" alt="favorite-product" />
+            <img class="favorite-image" :src="favorite.image" alt="favorite-product" @click="goToProductDetails(favorite)" />
             <div class="favorite-container-descriptions">
               <h1>{{ favorite.category }}</h1>
               <p class="price">{{ favorite.price }}$</p>
@@ -108,6 +108,9 @@ export default {
       }
       this.$store.commit("setFavorite", favorites);
       this.$router.go();
+    },
+    goToProductDetails(favorite) {
+      this.$router.push({ name: "Detail", params: { products: favorite.category, id: favorite.id } });
     },
   },
   computed: {
@@ -260,6 +263,7 @@ export default {
 .favorite-image {
   min-height: 350px;
   width: 300px;
+  cursor: pointer;
 }
 
 .card button:hover {
