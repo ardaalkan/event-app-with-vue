@@ -1,7 +1,9 @@
 <template>
   <NavbarView />
   <h1 class="product_detail_text">Product Detail</h1>
-  <p class="product-router-info">PRODUCT / {{ this.$route.params.products.toUpperCase() }}</p>
+  <p class="product-router-info">
+    PRODUCT / <span @click="goToProductDetails(this.$route.params.products)">{{ this.$route.params.products.toUpperCase() }}</span>
+  </p>
   <div class="product_title" v-for="detail in detailList" :key="detail.id" value="detail.id">
     <img class="product-detail-image" :src="detail.image" />
     <div class="product_details_container">
@@ -117,6 +119,10 @@ export default {
         this.$store.commit("setCart", carts);
       });
     },
+    goToProductDetails(products) {
+      // console.log(products);
+      this.$router.push({ name: "Products", params: { products: products } });
+    },
   },
 
   computed: {
@@ -156,6 +162,11 @@ hr {
   padding-bottom: 10px;
   margin-left: 5%;
   font-size: 12px;
+  cursor: pointer;
+}
+
+.product-router-info span:hover {
+  text-decoration: underline;
 }
 
 @media screen and (max-width: 950px) {

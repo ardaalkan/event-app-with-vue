@@ -14,7 +14,6 @@ import Toaster from "@meforma/vue-toaster";
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 // import VModal from 'vue-js-modal'
-// import VModal from 'vue-js-modal'
 
 const app = createApp(App);
 const vuetify = createVuetify({
