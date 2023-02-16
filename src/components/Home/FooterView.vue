@@ -20,7 +20,7 @@
   background-color: rgb(225, 225, 225);
   color: rgb(140, 140, 140);
   text-align: center;
-  margin-top: 45px;
+  margin-top: 65px;
 }
 
 .footer p {

@@ -23,14 +23,14 @@
           <option value="High to Low">Price high to low</option>
         </select>
       </label>
-      <div class="products-filter" v-if="selected">
-        <p>Selected :</p>
-        <span class="filtered-selected-size">{{ selected }}</span>
-      </div>
-      <div class="products-filter" v-if="pricesSelected">
-        <p>Prices Selected :</p>
-        <span class="filtered-selected-size">{{ pricesSelected }}</span>
-      </div>
+      <!-- <div class="products-filter" v-if="selected">
+          <p>Selected :</p>
+          <span class="filtered-selected-size">{{ selected }}</span>
+        </div>
+        <div class="products-filter" v-if="pricesSelected">
+          <p>Prices Selected :</p>
+          <span class="filtered-selected-size">{{ pricesSelected }}</span>
+        </div> -->
     </div>
     <section>
       <div class="product-item-count">
@@ -55,6 +55,7 @@
         <div class="empty-container-text" v-else>{{ this.$route.params.products }} Sizes Doesnt Exists.</div>
       </div>
     </section>
+    <FooterView />
   </body>
 </template>
 
@@ -67,17 +68,15 @@ export default {
       pricesSelected: "",
     };
   },
-
+  components: {},
   watch: {
     $route: "performApiCall",
     selected: "performApiCall",
     pricesSelected: "performApiCall",
   },
-
   created() {
     this.performApiCall();
   },
-
   methods: {
     async performApiCall() {
       let param = this.$route.params;
@@ -89,7 +88,6 @@ export default {
       });
     },
   },
-
   computed: {
     filteredList() {
       return JSON.parse(JSON.stringify(this.categoryList)).filter((item) => {
@@ -139,6 +137,7 @@ export default {
 <style>
 body {
   height: 100%;
+  width: 100%;
 }
 
 .empty-container-text {
@@ -318,5 +317,11 @@ body {
 }
 select::-ms-expand {
   display: none;
+}
+
+@media screen and (max-width: 655px) {
+  .card_container {
+    justify-content: center;
+  }
 }
 </style>

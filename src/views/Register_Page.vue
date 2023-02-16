@@ -34,6 +34,9 @@
   <!-- {{ v$.form.password.$invalid }} -->
 </template>
 
+<!-- <script setup>
+</script> -->
+
 <script>
 import CryptoJS from "crypto-js";
 import useValidate from "@vuelidate/core";

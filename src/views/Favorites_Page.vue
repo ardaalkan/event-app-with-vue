@@ -201,8 +201,18 @@ export default {
 .favorite-item-iterate {
   display: flex;
   flex-direction: row;
+  width: 100%;
   margin: auto;
   justify-content: center;
+}
+
+@media screen and (max-width: 945px) {
+  .favorite-item-iterate {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
 }
 
 .favorite-container-descriptions {
@@ -327,5 +337,8 @@ body {
 }
 select::-ms-expand {
   display: none;
+}
+body {
+  width: 100%;
 }
 </style>

@@ -1,34 +1,34 @@
 <template>
-    <NavbarView />
-    <h1 class="home_text">Home Page <span>E-Commerce</span></h1>
-    <section class="hero-section">
-      <div class="container-large relative">
-        <div class="hero-content">
-          <h2>Save your money <br />with us.</h2>
-          <p>This site is created for demonstrative purposes only and does not offer any <br />real products or services..</p>
+  <NavbarView />
+  <h1 class="home_text">Home Page <span>E-Commerce</span></h1>
+  <section class="hero-section">
+    <div class="container-large relative">
+      <div class="hero-content">
+        <h2>Save your money <br />with us.</h2>
+        <p>This site is created for demonstrative purposes only and does not offer any <br />real products or services..</p>
+      </div>
+      <div class="hero-image text-right">
+        <img src="../assets/images-svg/header.svg" />
+      </div>
+    </div>
+  </section>
+  <section class="section-bg container-large">
+    <div class="container-large">
+      <div class="row">
+        <div class="column">
+          <img src="../assets/images-svg/section-1.svg" alt="We are the high level storage e-commerce" />
         </div>
-        <div class="hero-image text-right">
-          <img src="../assets/images-svg/header.svg" />
+        <div class="column flex-fill">
+          <h2>We are the high level <br />storage e-commerce</h2>
+          <p>This site is created for demonstrative purposes only and does not offer any real products or services.</p>
         </div>
       </div>
-    </section>
-    <section class="section-bg container-large">
-      <div class="container-large">
-        <div class="row">
-          <div class="column">
-            <img src="../assets/images-svg/section-1.svg" alt="We are the high level storage e-commerce" />
-          </div>
-          <div class="column flex-fill">
-            <h2>We are the high level <br />storage e-commerce</h2>
-            <p>This site is created for demonstrative purposes only and does not offer any real products or services.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-    <FooterView />
+    </div>
+  </section>
+  <FooterView />
 </template>
 
-<script></script>
+<script setup></script>
 
 <style>
 /* Section One */
@@ -140,11 +140,15 @@
     display: flex;
     flex-direction: column;
   }
+  .hero-section {
+    text-align-last: center;
+  }
   .hero-section .hero-image {
     display: none;
   }
   .home_text {
-    font-size: 25px;
+    padding: 25px;
+    font-size: 20px;
   }
   .hero-content {
     padding-left: 20px;

@@ -114,6 +114,18 @@ export default {
   font-family: "Montserrat", sans-serif;
 }
 
+@media screen and (max-width: 600px) {
+  .container_register {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .container_register {
+    width: 95%;
+  }
+}
+
 .textarea-input {
   margin: 30px;
   height: 100px;
