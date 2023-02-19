@@ -1,10 +1,9 @@
 <template>
-  <form action="action">
+  <form>
     <div class="container_register">
       <h1>Register</h1>
       <p>Please fill in this form to create an account.</p>
       <hr />
-
       <label for="text"><b>Username</b></label>
       <br />
       <small v-if="v$.form.username.$error">Name must be exists.</small>
@@ -25,12 +24,13 @@
       <hr />
       <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
       <button class="registerbtn" @click="onSave()">Register</button>
-    </div>
 
-    <div class="container_signin">
-      <p>Already have an account? <router-link :to="{ name: 'Login' }">Giriş Yap</router-link></p>
+      <div class="container_signin">
+        <p>Already have an account? <router-link :to="{ name: 'Login' }">Giriş Yap</router-link></p>
+      </div>
     </div>
   </form>
+
   <!-- {{ v$.form.password.$invalid }} -->
 </template>
 
@@ -77,18 +77,21 @@ export default {
     };
   },
   methods: {
-    onSave() {
-      const password = this.form.password;
-      const key = "booklike123!456";
-      const cryptedPassword = CryptoJS.HmacSHA1(password, key).toString();
+    async onSave() {
+      try {
+        const password = CryptoJS.HmacSHA1(this.form.password, this.$store.getters._saltKey).toString();
+        const login_response = await this.$appAxios.get(`/users?username=${this.form.username}&password=${password}`);
 
-      this.$appAxios.post("/users", { ...this.form, password: cryptedPassword }).then((registered_user_response) => {
-        console.log("registered_user_response :>>", registered_user_response);
-        this.$router.push({ name: "Home" });
-      });
-
-      console.log(cryptedPassword);
-      // console.log(this.form);
+        if (login_response?.data?.length > 0) {
+          this.$store.commit("setUser", login_response?.data[0]);
+          this.$router.push({ name: "Home" });
+          console.log(this.$router.currentRoute);
+        } else {
+          alert("Inputs must be exists.");
+        }
+      } catch (error) {
+        console.log(error);
+      }
     },
   },
 };

@@ -5,22 +5,13 @@
       <label class="selected">
         <select v-model="selected">
           <option value="">All Sizes</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-          <option value="11">11</option>
-          <option value="12">12</option>
-          <option value="13">13</option>
-          <option value="14">14</option>
-          <option value="15">15</option>
+          <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
         </select>
       </label>
       <label class="selected">
         <select v-model="pricesSelected">
           <option value="">All Prices</option>
-          <option value="Low to High">Price low to high</option>
-          <option value="High to Low">Price high to low</option>
+          <option v-for="option in priceOptions" :value="option.value" :key="option.value">{{ option.label }}</option>
         </select>
       </label>
       <!-- <div class="products-filter" v-if="selected">
@@ -66,6 +57,21 @@ export default {
       categoryList: [],
       selected: "",
       pricesSelected: "",
+      priceOptions: [
+        { label: "Price low to high", value: "Low to High" },
+        { label: "Price high to low", value: "High to Low" },
+      ],
+      options: [
+        { label: "7", value: "7" },
+        { label: "8", value: "8" },
+        { label: "9", value: "9" },
+        { label: "10", value: "10" },
+        { label: "11", value: "11" },
+        { label: "12", value: "12" },
+        { label: "13", value: "13" },
+        { label: "14", value: "14" },
+        { label: "15", value: "15" },
+      ],
     };
   },
   components: {},
@@ -143,6 +149,7 @@ body {
 .empty-container-text {
   padding-top: 30px;
   font-size: 30px;
+  min-height: 350px;
 }
 
 .empty-container-text::first-letter {

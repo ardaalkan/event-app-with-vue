@@ -4,7 +4,6 @@
     <div class="container_login">
       <h1>Login</h1>
       <hr />
-
       <label for="username"><b>Username</b></label>
       <br />
       <small v-if="v$.form.username.$error">Username must be exists.</small>
@@ -25,7 +24,6 @@
     </div> -->
   </div>
 </template>
-
 <script>
 import CryptoJS from "crypto-js";
 import useValidate from "@vuelidate/core";
@@ -36,7 +34,6 @@ export default {
       v$: useValidate(),
     };
   },
-
   validations() {
     return {
       form: {
@@ -64,6 +61,7 @@ export default {
       },
     };
   },
+
   methods: {
     onSubmit() {
       const password = CryptoJS.HmacSHA1(this.form.password, this.$store.getters._saltKey).toString();
@@ -80,9 +78,6 @@ export default {
           console.log(login_response);
         })
         .catch((e) => console.log(e));
-      // .finally(() => {
-      //   this.loader = false;
-      // });
     },
   },
 };

@@ -12,15 +12,7 @@
             <label class="selected">
               <select v-model="pricesSelect">
                 <option value="">All Sizes</option>
-                <option value="7">7</option>
-                <option value="8">8</option>
-                <option value="9">9</option>
-                <option value="10">10</option>
-                <option value="11">11</option>
-                <option value="12">12</option>
-                <option value="13">13</option>
-                <option value="14">14</option>
-                <option value="15">15</option>
+                <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
               </select>
             </label>
             <!-- <label class="selected">
@@ -66,6 +58,17 @@ export default {
       svgContent: require("@/assets/images-svg/full-heart.svg"),
       svg1: require("@/assets/images-svg/full-heart.svg"),
       svg2: require("@/assets/images-svg/empty-heart.svg"),
+      options: [
+        { label: "7", value: "7" },
+        { label: "8", value: "8" },
+        { label: "9", value: "9" },
+        { label: "10", value: "10" },
+        { label: "11", value: "11" },
+        { label: "12", value: "12" },
+        { label: "13", value: "13" },
+        { label: "14", value: "14" },
+        { label: "15", value: "15" },
+      ],
     };
   },
 

@@ -4,23 +4,22 @@
   </div>
 </template>
 
-<script>
-
-</script>
+<script></script>
 
 <style>
 .footer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  left: 0;
+  position: relative;
+  margin-top: 75px;
   bottom: 0;
-  height: 15rem;
+  left: 0;
   width: 100%;
   background-color: rgb(225, 225, 225);
   color: rgb(140, 140, 140);
   text-align: center;
-  margin-top: 65px;
+  height: 15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .footer p {
